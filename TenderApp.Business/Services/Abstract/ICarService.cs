@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TenderApp.Entities;
 
-namespace TenderApp.Business.Abstract
+namespace TenderApp.Business.Services.Abstract
 {
     public interface ICarService
     {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TenderApp.Business.Abstract;
 
-namespace TenderApp.Business
+namespace TenderApp.Business.Services.Abstract
 {
-    public class DocumentManager:IDocumentService
+    public interface IDocumentService
     {
+
     }
 }

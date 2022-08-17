@@ -7,7 +7,7 @@ using TenderApp.Core.Entities;
 
 namespace TenderApp.Entities
 {
-    public  class Car:BaseEntity
+    public  class Car: BaseEntity
     {
         public string Plate { get; set; }
         public string PlateState { get; set; }

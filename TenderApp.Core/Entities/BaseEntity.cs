@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TenderApp.Core.Entities
 {
-    public abstract class BaseEntity
+    public class BaseEntity:IEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]

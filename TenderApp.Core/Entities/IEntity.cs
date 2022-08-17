@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TenderApp.Business.Abstract
+namespace TenderApp.Core.Entities
 {
-    public interface IDocumentService
+    public interface IEntity
     {
 
     }

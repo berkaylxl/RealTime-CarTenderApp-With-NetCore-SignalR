@@ -8,17 +8,14 @@ using TenderApp.Core.Entities;
 
 namespace TenderApp.Core.DataAccess
 {
-    public interface IGenericRepository<TEntity> where TEntity :class ,new()
+    public interface IGenericRepository<TEntity> where TEntity :BaseEntity
     {
-        Task AddAsync(TEntity entity);
-        Task AddAsync(IEnumerable<TEntity> entities);
-
-        Task UpdateAsync(TEntity entity);
-
-        Task DeleteAsync(TEntity entity);
-
-        Task<List<TEntity>> GetAll(Expression<Func<TEntity,bool>> filter=null);
-        Task<TEntity> Get(Expression<Func<TEntity, bool>> filter );
+        Task Add(TEntity entity);
+        Task Add(IEnumerable<TEntity> entities);
+        Task Update(TEntity entity);
+        Task Delete(TEntity entity);
+        List<TEntity>GetAll(Expression<Func<TEntity,bool>> filter=null);
+        Task<TEntity> Get(Expression<Func<TEntity, bool>> filter);
        
 
 
