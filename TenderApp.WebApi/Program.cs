@@ -1,11 +1,17 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using TenderApp.Business;
-using TenderApp.Business.Abstract;
 using TenderApp.DataAccess;
 using TenderApp.DataAccess.Abstract;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TenderApp.Business.Services.Abstract;
+using TenderApp.Business.Services;
+using TenderApp.Business.Validation;
+using FluentValidation;
+using TenderApp.Business.Mapping;
+using TenderApp.Entities.DTOs;
+using TenderApp.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +24,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IUserDal, UserDal>();
 builder.Services.AddSingleton<IUserService, UserManager>();
 
+//Validator Services
+
+builder.Services.AddAutoMapper(typeof(UserProfile));
+builder.Services.AddScoped<IValidator<User>, UserValidator>();
+
+//Authenticate
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -16,10 +17,12 @@ namespace TenderApp.Business.Services
     public class UserManager : IUserService
     {
          private readonly IUserDal _userDal;
+        private readonly IMapper _mapper;
 
-        public UserManager(IUserDal userDal)
+        public UserManager(IUserDal userDal, IMapper mapper)
         {
             _userDal = userDal;
+            _mapper = mapper;
         }
         public async Task DeleteById(Guid id)
         {
@@ -70,26 +73,22 @@ namespace TenderApp.Business.Services
             var token=JwtHelper.GenerateToken(claims);
             return token;
         }
-        public async Task Register(RegisterDto registerDto)
+        public async Task<string> Register(RegisterDto registerDto)
         {
+            
+            var  registerUser= _mapper.Map<User>(registerDto);
+                  registerUser.Password=Encrpt(registerDto.Password);
+            registerUser.Claim = "user";
+            await _userDal.Add(registerUser);
 
-
-
-
-
-
-
+            return "You should go /Login ";
         }
-
-
-
 
         private static string Encrpt(string password)
         {
             using var md5 = MD5.Create();
             byte[] inputBytes = Encoding.ASCII.GetBytes(password);
             byte[] hashBytes = md5.ComputeHash(inputBytes);
-
             return Convert.ToHexString(hashBytes);
         }
 

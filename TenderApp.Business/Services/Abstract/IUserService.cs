@@ -17,6 +17,7 @@ namespace TenderApp.Business.Services.Abstract
         Task Update(User user);
         Task DeleteById(Guid id);
         Task<JwtToken> Login(LoginDto loginDto);
+        Task<string> Register(RegisterDto registerDto);
         Task<User>GetByMail(string mail);
        
     }

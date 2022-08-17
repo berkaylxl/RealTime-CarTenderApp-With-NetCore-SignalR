@@ -16,4 +16,9 @@
     <ProjectReference Include="..\TenderApp.DataAccess\TenderApp.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
+    <Folder Include="wwwroot\Document\" />
+  </ItemGroup>
+
 </Project>
