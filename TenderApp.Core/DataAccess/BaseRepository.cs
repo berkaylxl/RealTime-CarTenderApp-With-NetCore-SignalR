@@ -46,16 +46,17 @@ namespace TenderApp.Core.DataAccess
         {
             using (TContext context =new TContext())
             {
-                return await context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(filter);
+                var response = await context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(filter);
+                return response;
             }
         }
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter=null)
+        public async Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter=null)
         {
             using (TContext context = new TContext())
             {
                 if(filter is null)
-                    return context.Set<TEntity>().ToList();
-                return context.Set<TEntity>().Where(filter).ToList();
+                    return await context.Set<TEntity>().ToListAsync();
+                return  await context.Set<TEntity>().Where(filter).ToListAsync();
                
             }
         }

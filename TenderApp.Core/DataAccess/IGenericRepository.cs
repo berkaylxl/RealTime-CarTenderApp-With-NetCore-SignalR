@@ -14,7 +14,7 @@ namespace TenderApp.Core.DataAccess
         Task Add(IEnumerable<TEntity> entities);
         Task Update(TEntity entity);
         Task Delete(TEntity entity);
-        List<TEntity>GetAll(Expression<Func<TEntity,bool>> filter=null);
+        Task<List<TEntity>>GetAll(Expression<Func<TEntity,bool>> filter=null);
         Task<TEntity> Get(Expression<Func<TEntity, bool>> filter);
        
 

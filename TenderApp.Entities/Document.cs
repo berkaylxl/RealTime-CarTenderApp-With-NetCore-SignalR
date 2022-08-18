@@ -12,7 +12,19 @@ namespace TenderApp.Entities
     public class Document:BaseEntity
     {
 
+
         public Guid CarId { get; set; }
+        public Guid CreateByUserId { get; set; }
         public  string Url { get; set; }
+        public string FileName { get; set; }
+        public DateTime CreateDate { get; set; }
+        public bool IsActive { get; set; }
+        public DocumentType DocumentType { get; set; }
+
+    }
+    public enum DocumentType
+    {
+        DocumentPdf=1,
+        DocumentImage=2
     }
 }

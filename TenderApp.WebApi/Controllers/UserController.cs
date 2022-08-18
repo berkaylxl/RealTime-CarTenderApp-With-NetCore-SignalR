@@ -5,12 +5,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TenderApp.Business.Services.Abstract;
 using TenderApp.Core.Utilities;
+using TenderApp.Core.Utilities.Security;
 using TenderApp.Entities;
 using TenderApp.Entities.DTOs;
 
 namespace TenderApp.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -26,48 +27,47 @@ namespace TenderApp.WebApi.Controllers
             _mapper = mapper;
         }
        // [Authorize(Roles ="admin")]
-        [HttpGet("getall")]
-        public IActionResult GetAll()
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
-            var res = _userService.GetAll();
+            var res =await _userService.GetAll();
             return Ok(res);
         }
-        [HttpGet("getbyid/{id}")]
+        [HttpGet]
         public async Task<IActionResult> GetById(Guid id)
         {
             var res = await _userService.GetById(id);
             return Ok(res);
         }
-        [HttpPost("add")]
+        [HttpPost]
         public async Task<IActionResult> Add(User user)
         {
             var validResult = await _validator.ValidateAsync(user);
 
             if (validResult.IsValid)
             {
-                await _userService.Add(user);
-                return Ok("User Added");
+                
+                return Ok(await _userService.Add(user));
             }
             return BadRequest(ValidateHelper.SendValidateMessage(validResult));
 
         }
-        [HttpDelete("delete/{id}")]
+        [HttpDelete]
         public async Task<IActionResult> Delete(Guid id)
         {
-            await _userService.DeleteById(id);
-            return Ok(" User Deleted");
+            return Ok(await _userService.DeleteById(id));
         }
 
-        [HttpPost("login")]
+        [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
                 var res = await _userService.Login(loginDto);
             if (res != null)
                 return Ok(res);
-            return BadRequest();
+            return BadRequest(res);
         }
 
-        [HttpPost("register")]
+        [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
             var validResult = await _validator.ValidateAsync(_mapper.Map<User>(registerDto));
@@ -78,14 +78,6 @@ namespace TenderApp.WebApi.Controllers
             }
 
             return BadRequest(ValidateHelper.SendValidateMessage(validResult));
-
-
-
-
-
         }
-
-
-
     }
 }

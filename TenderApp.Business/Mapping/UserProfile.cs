@@ -14,6 +14,7 @@ namespace TenderApp.Business.Mapping
         public UserProfile()
         {
             CreateMap<User,RegisterDto >().ReverseMap();
+            CreateMap<Document, DocumentDto>().ReverseMap();
         }
     }
 }

@@ -21,8 +21,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddSingleton<IUserDal, UserDal>();
 builder.Services.AddSingleton<IUserService, UserManager>();
+builder.Services.AddSingleton<IDocumentDal, DocumentDal>();
+builder.Services.AddSingleton<IDocumentService, DocumentManager>();
 
 //Validator Services
 

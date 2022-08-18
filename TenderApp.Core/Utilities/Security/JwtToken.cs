@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TenderApp.Core.Utilities
+namespace TenderApp.Core.Utilities.Security
 {
     public  class JwtToken
     {

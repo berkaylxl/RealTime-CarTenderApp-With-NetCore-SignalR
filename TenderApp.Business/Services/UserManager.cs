@@ -8,15 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using TenderApp.Business.Services.Abstract;
 using TenderApp.Core.Utilities;
+using TenderApp.Core.Utilities.Result;
+using TenderApp.Core.Utilities.Security;
 using TenderApp.DataAccess.Abstract;
 using TenderApp.Entities;
 using TenderApp.Entities.DTOs;
+using static TenderApp.Core.Utilities.Result.ResultStatus;
 
 namespace TenderApp.Business.Services
 {
     public class UserManager : IUserService
     {
-         private readonly IUserDal _userDal;
+        private readonly IUserDal _userDal;
         private readonly IMapper _mapper;
 
         public UserManager(IUserDal userDal, IMapper mapper)
@@ -24,64 +27,76 @@ namespace TenderApp.Business.Services
             _userDal = userDal;
             _mapper = mapper;
         }
-        public async Task DeleteById(Guid id)
+        public async Task<Result> DeleteById(Guid id)
         {
             var user = await _userDal.Get(u => u.Id == id);
+            if (user is null)
+                return new Result(Status.Error, "Cannot delete user > (User Not Found)");
             await _userDal.Delete(user);
+            return new Result(Status.Success,"User was Deleted");
         }
 
-        public List<User> GetAll()
+        public async Task<DataResult<List<User>>> GetAll()
         {
-            return _userDal.GetAll();
-        }
-        public async Task<User> GetById(Guid id)
-        {
-            return await _userDal.Get(u=>u.Id==id);
-        }
+            var data = await _userDal.GetAll();
+            return new DataResult<List<User>>(Status.Success,data,"User was Listed");
 
-        public async Task<User> GetByMail(string mail)
-        {
-            return await _userDal.Get(u => u.Email == mail);
         }
-        public async Task Update(User user)
+        public async Task<DataResult<User>> GetById(Guid id)
+        {
+            var data = await _userDal.Get(u => u.Id == id);
+            if (data is null)
+                return new DataResult<User>(Status.Error, data,"User Not Found");
+            return new DataResult<User>(Status.Success, data);
+
+        }
+        public async Task<DataResult<User>> GetByMail(string mail)
+        {
+            var data = await _userDal.Get(u => u.Email == mail);
+            if (data is null)
+                return new DataResult<User>(Status.Error, data, "User Not Found");
+            return new DataResult<User>(data);
+        }
+        public async Task<Result> Update(User user)
         {
             await _userDal.Update(user);
+            return new Result(Status.Success,"User was Updated");
         }
-        public async Task Add(User user)
+        public async Task<Result> Add(User user)
         {
             await _userDal.Add(user);
+            return new Result(Status.Success, "User was Added");
         }
 
         // --------------------------------------------------------------------LOGIN REGISTER
 
-        public async Task<JwtToken> Login(LoginDto loginDto)
+        public async Task<DataResult<JwtToken>> Login(LoginDto loginDto)
         {
             var user = await GetByMail(loginDto.Email);
             if (user is null)
-                throw new Exception("user not found");
+                return new DataResult<JwtToken>(Status.Error,null, "User not found");
             var password = Encrpt(loginDto.Password);
-            if (user.Password != password)
-                throw new Exception("password is wrong");
+            if (user.Data.Password != password)
+                return new DataResult<JwtToken>(Status.Error, null, "Password is wrong");
 
             var claims = new Claim[]{
 
-                new Claim(ClaimTypes.Role,user.Claim),
-                new Claim(ClaimTypes.Email,user.Email),
-                new Claim(ClaimTypes.GivenName,user.FirstName),
-                new Claim(ClaimTypes.Surname,user.LastName)
+                new Claim(ClaimTypes.Role,user.Data.Claim),
+                new Claim(ClaimTypes.Email,user.Data.Email),
+                new Claim(ClaimTypes.GivenName,user.Data.FirstName),
+                new Claim(ClaimTypes.Surname,user.Data.LastName)
             };
-            var token=JwtHelper.GenerateToken(claims);
-            return token;
+            var token = JwtHelper.GenerateToken(claims);
+            return new DataResult<JwtToken>(Status.Success,token,"Login is Successful");
         }
-        public async Task<string> Register(RegisterDto registerDto)
+        public async Task<DataResult<string>> Register(RegisterDto registerDto)
         {
-            
-            var  registerUser= _mapper.Map<User>(registerDto);
-                  registerUser.Password=Encrpt(registerDto.Password);
-            registerUser.Claim = "user";
-            await _userDal.Add(registerUser);
 
-            return "You should go /Login ";
+            var registerUser = _mapper.Map<User>(registerDto);
+            registerUser.Password = Encrpt(registerDto.Password);
+            registerUser.Claim = "user";
+            await _userDal.Add(registerUser); 
+            return new DataResult<string>(Status.Success,"Register is Succussful");
         }
 
         private static string Encrpt(string password)
@@ -92,6 +107,6 @@ namespace TenderApp.Business.Services
             return Convert.ToHexString(hashBytes);
         }
 
-       
+
     }
 }
