@@ -26,6 +26,9 @@ builder.Services.AddSingleton<IUserDal, UserDal>();
 builder.Services.AddSingleton<IUserService, UserManager>();
 builder.Services.AddSingleton<IDocumentDal, DocumentDal>();
 builder.Services.AddSingleton<IDocumentService, DocumentManager>();
+builder.Services.AddSingleton<ICarDal, CarDal>();
+builder.Services.AddSingleton<ICarService, CarManager>();
+
 
 //Validator Services
 

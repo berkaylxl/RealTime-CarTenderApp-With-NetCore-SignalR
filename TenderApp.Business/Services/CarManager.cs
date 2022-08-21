@@ -7,6 +7,7 @@ using TenderApp.Business.Services.Abstract;
 using TenderApp.Core.Utilities.Result;
 using TenderApp.DataAccess.Abstract;
 using TenderApp.Entities;
+using static TenderApp.Core.Utilities.Result.ResultStatus;
 
 namespace TenderApp.Business.Services
 {
@@ -18,25 +19,35 @@ namespace TenderApp.Business.Services
         {
             _carDal = carDal;
         }
-        public Task<Result> Add(Car car)
+        public async  Task<Result> Add(Car car)
         {
-            throw new NotImplementedException();
+            await _carDal.Add(car);
+            return new Result(Status.Success, "Car was Added");
         }
-        public Task<Result> Delete(Guid id)
+        public async Task<Result> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var car = await _carDal.Get(u => u.Id == id);
+            if (car is null)
+                return new Result(Status.Error, "Cannot delete car > (Car Not Found)");
+            await _carDal.Delete(car);
+            return new Result(Status.Success, "Car was Deleted");
         }
-        public Task<DataResult<List<Car>>> GetAll()
+        public async Task<DataResult<List<Car>>> GetAll()
         {
-            throw new NotImplementedException();
+            var data = await _carDal.GetAll();
+            return new DataResult<List<Car>>(Status.Success, data, "Cars were Listed");
         }
-        public Task<DataResult<Car>> GetById(Guid id)
+        public async Task<DataResult<Car>> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var data = await _carDal.Get(u => u.Id == id);
+            if (data is null)
+                return new DataResult<Car>(Status.Error, data, "Car Not Found");
+            return new DataResult<Car>(Status.Success, data);
         }
-        public Task<Result> Update(Car car)
+        public async Task<Result> Update(Car car)
         {
-            throw new NotImplementedException();
+            await _carDal.Update(car);
+            return new Result(Status.Success, "Car was Updated");
         }
     }
 }
