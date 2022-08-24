@@ -13,7 +13,11 @@ namespace TenderApp.Business.Mapping
     {
         public UserProfile()
         {
-            CreateMap<User,RegisterDto >().ReverseMap();
+            CreateMap<User, IndividualRegisterDto>().ReverseMap();
+            CreateMap<User, CorporateRegisterDto>().ReverseMap();
+            CreateMap<User, LoginDto>().ReverseMap();
+            CreateMap<IndividualCustomer, IndividualRegisterDto>().ReverseMap();
+            CreateMap<CorporateCustomer, CorporateRegisterDto>().ReverseMap();
             CreateMap<Document, DocumentDto>().ReverseMap();
         }
     }

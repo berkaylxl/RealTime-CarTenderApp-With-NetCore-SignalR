@@ -12,6 +12,7 @@ using FluentValidation;
 using TenderApp.Business.Mapping;
 using TenderApp.Entities.DTOs;
 using TenderApp.Entities;
+using TenderApp.Business.Services.SignalRHub;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,18 +23,32 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IUserDal, UserDal>();
-builder.Services.AddSingleton<IUserService, UserManager>();
+builder.Services.AddSingleton<IAuthService, AuthManager>();
+
 builder.Services.AddSingleton<IDocumentDal, DocumentDal>();
 builder.Services.AddSingleton<IDocumentService, DocumentManager>();
+
 builder.Services.AddSingleton<ICarDal, CarDal>();
 builder.Services.AddSingleton<ICarService, CarManager>();
+
+builder.Services.AddSingleton<ITenderDal, TenderDal>();
+builder.Services.AddSingleton<ITenderService, TenderManager>();
+
+builder.Services.AddSingleton<ICorporateCustomerDal, CorporateCustomerDal>();
+builder.Services.AddSingleton<ICorporateCustomerService, CorporateCustomerManager>();
+
+builder.Services.AddSingleton<IIndividualCustomerDal, IndividualCustomerDal>();
+builder.Services.AddSingleton<IIndividualCustomerService, IndividualCustomerManager>();
+
+builder.Services.AddSignalR();
 
 
 //Validator Services
 
 builder.Services.AddAutoMapper(typeof(UserProfile));
-builder.Services.AddScoped<IValidator<User>, UserValidator>();
+builder.Services.AddScoped<IValidator<User>, LoginValidator>();
+builder.Services.AddScoped<IValidator<IndividualCustomer>, IndividualCustomerRegisterValidator>();
+builder.Services.AddScoped<IValidator<CorporateCustomer>, CorporateCustomerRegisterValidator>();
 
 //Authenticate
 builder.Services.AddAuthentication(x =>
@@ -52,6 +67,15 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
+builder.Services.AddCors(
+               options => options.AddPolicy("AllowCors",
+                   builder =>
+                   {
+                       builder
+                           .AllowAnyOrigin()
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
+                   }));
 
 var app = builder.Build();
 
@@ -62,6 +86,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowCors");
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
@@ -69,5 +95,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<TenderHub>("/TenderHub");
 
 app.Run();
