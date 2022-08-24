@@ -8,7 +8,7 @@ using TenderApp.Core.Entities;
 
 namespace TenderApp.Core.DataAccess
 {
-    public interface IGenericRepository<TEntity> where TEntity :BaseEntity
+    public interface IGenericRepository<TEntity> where TEntity :IEntity
     {
         Task Add(TEntity entity);
         Task Add(IEnumerable<TEntity> entities);

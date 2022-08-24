@@ -11,7 +11,7 @@ using TenderApp.Core.DataAccess;
 namespace TenderApp.Core.DataAccess
 {
     public class BaseRepository<TEntity,TContext> : IGenericRepository<TEntity> 
-        where TEntity :BaseEntity
+        where TEntity :class,IEntity
         where TContext:DbContext,new()   
     {
        
