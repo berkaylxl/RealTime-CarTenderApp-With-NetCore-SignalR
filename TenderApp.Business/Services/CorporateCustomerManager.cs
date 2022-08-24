@@ -14,6 +14,12 @@ namespace TenderApp.Business.Services
     public class CorporateCustomerManager : ICorporateCustomerService
     {
         private readonly ICorporateCustomerDal corporateCustomerDal;
+
+        public CorporateCustomerManager(ICorporateCustomerDal corporateCustomerDal)
+        {
+            this.corporateCustomerDal = corporateCustomerDal;
+        }
+
         public async Task<Result> Add(CorporateCustomer corporateCustomer)
         {
             await corporateCustomerDal.Add(corporateCustomer);

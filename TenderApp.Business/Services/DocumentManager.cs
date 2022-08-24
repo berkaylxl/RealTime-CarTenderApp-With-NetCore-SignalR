@@ -50,7 +50,7 @@ namespace TenderApp.Business.Services
             {
                 File.Delete(document.Url);
                 await _documentDal.Delete(document);
-                return new Result(Status.Success, "Document was deleted");
+                return new Result(Status.Success, "Document  deleted");
             }
             catch (Exception e)
             {
@@ -63,7 +63,7 @@ namespace TenderApp.Business.Services
             var document = await _documentDal.GetAll(d => d.CarId == id);
             if (!document.Any())
                 return new DataResult<List<Document>>(Status.Error, document, "Document not found");
-            return new DataResult<List<Document>>(Status.Success, document, "Document was found");
+            return new DataResult<List<Document>>(Status.Success, document, "Document found");
 
         }
         public async Task<DataResult<Document>> GetById(Guid id)
@@ -71,7 +71,7 @@ namespace TenderApp.Business.Services
             var data = await _documentDal.Get(d => d.Id == id);
             if (data is null)
                 return new DataResult<Document>(Status.Error, data, "Document not found");
-            return new DataResult<Document>(Status.Success, data, "Document was found");
+            return new DataResult<Document>(Status.Success, data, "Document found");
         }
         private string CreateNewFilePath(IFormFile file)
         {
@@ -105,7 +105,7 @@ namespace TenderApp.Business.Services
                 return new Result(Status.Error, "Document not Found");
             document.IsActive = isActive;
             await _documentDal.Update(document);
-            return new Result(Status.Error, "Document was  Uptaded");
+            return new Result(Status.Error, "Document  Uptaded");
         }
     }
 }

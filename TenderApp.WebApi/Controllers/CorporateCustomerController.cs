@@ -7,43 +7,36 @@ namespace TenderApp.WebApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class CarController : ControllerBase
+    public class CorporateCustomerController : ControllerBase
     {
-        private readonly ICarService _carService;
+        private readonly ICorporateCustomerService _corporateCustomerService;
 
-        public CarController(ICarService carService)
+        public CorporateCustomerController(ICorporateCustomerService corporateCustomerService)
         {
-            _carService = carService;
+            _corporateCustomerService = corporateCustomerService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var res = await _carService.GetAll();
+            var res = await _corporateCustomerService.GetAll();
             return Ok(res);
         }
         [HttpGet]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var res = await _carService.GetById(id);
-            return Ok(res);
-        }
-        [HttpPost]
-        public async Task<IActionResult> Add(Car car)
-        {
-            var res = await _carService.Add(car);
+            var res = await _corporateCustomerService.GetById(id);
             return Ok(res);
         }
         [HttpDelete]
         public async Task<IActionResult> Delete(Guid id)
         {
-            return Ok(await _carService.Delete(id));
+            return Ok(await _corporateCustomerService.DeleteById(id));
         }
-
         [HttpPut]
-        public async Task<IActionResult> Update(Car car)
+        public async Task<IActionResult> Update(CorporateCustomer customer)
         {
-            return Ok(await _carService.Update(car));
+            return Ok(await _corporateCustomerService.Update(customer));
         }
     }
 }

@@ -14,6 +14,12 @@ namespace TenderApp.Business.Services
     public class IndividualCustomerManager : IIndividualCustomerService
     {
         private readonly IIndividualCustomerDal individualCustomerDal;
+
+        public IndividualCustomerManager(IIndividualCustomerDal individualCustomerDal)
+        {
+            this.individualCustomerDal = individualCustomerDal;
+        }
+
         public async Task<Result> Add(IndividualCustomer IndividualCustomer)
         {
             await individualCustomerDal.Add(IndividualCustomer);

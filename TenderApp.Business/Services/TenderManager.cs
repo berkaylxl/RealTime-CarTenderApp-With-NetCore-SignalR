@@ -4,36 +4,53 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TenderApp.Business.Services.Abstract;
+using TenderApp.Core.Utilities.Result;
 using TenderApp.DataAccess.Abstract;
 using TenderApp.Entities;
+using static TenderApp.Core.Utilities.Result.ResultStatus;
 
 namespace TenderApp.Business.Services
 {
     public class TenderManager : ITenderService
     {
-        public Task Add(Tender tender)
+        private readonly ITenderDal _tenderDal;
+
+        public TenderManager(ITenderDal tenderDal)
         {
-            throw new NotImplementedException();
+            _tenderDal = tenderDal;
         }
 
-        public Task Delete(Guid id)
+        public async Task<Result> Add(Tender tender)
         {
-            throw new NotImplementedException();
+            await _tenderDal.Add(tender);
+            return new Result(Status.Success,"Tender added");
         }
 
-        public Task<Tender> Get(Guid id)
+        public async Task<Result> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var tender = await _tenderDal.Get(u => u.Id == id);
+            if (tender is null)
+                return new Result(Status.Error, "Cannot delete tender > (Tender Not Found)");
+            await _tenderDal.Delete(tender);
+            return new Result(Status.Success, "Tender  Deleted");
+        }
+        public async Task<DataResult<Tender>> GetById(Guid id)
+        {
+            var data = await _tenderDal.Get(u => u.Id == id);
+            if (data is null)
+                return new DataResult<Tender>(Status.Error, data, "Tender Not Found");
+            return new DataResult<Tender>(Status.Success, data);
         }
 
-        public Task<List<Tender>> GetAll()
+        public async Task<DataResult<List<Tender>>> GetAll()
         {
-            throw new NotImplementedException();
+            var data = await _tenderDal.GetAll();
+            return new DataResult<List<Tender>>(Status.Success, data, "Tenders Listed");
         }
-
-        public Task Update(Tender tender)
+        public async Task<Result> Update(Tender tender)
         {
-            throw new NotImplementedException();
+            await _tenderDal.Update(tender);
+            return new Result(Status.Success, "Tender  Updated");
         }
     }
 }

@@ -12,14 +12,20 @@ using FluentValidation;
 using TenderApp.Business.Mapping;
 using TenderApp.Entities.DTOs;
 using TenderApp.Entities;
-using TenderApp.Business.Services.SignalRHub;
+using TenderApp.Business.SignalRHub;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors(opt => opt.AddDefaultPolicy((policy) =>
+{
+    policy.AllowAnyMethod()
+          .AllowAnyHeader()
+          .AllowCredentials()
+          .SetIsOriginAllowed(origin => true);
+}));
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -41,7 +47,6 @@ builder.Services.AddSingleton<IIndividualCustomerDal, IndividualCustomerDal>();
 builder.Services.AddSingleton<IIndividualCustomerService, IndividualCustomerManager>();
 
 builder.Services.AddSignalR();
-
 
 //Validator Services
 
@@ -67,26 +72,17 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
-builder.Services.AddCors(
-               options => options.AddPolicy("AllowCors",
-                   builder =>
-                   {
-                       builder
-                           .AllowAnyOrigin()
-                           .AllowAnyHeader()
-                           .AllowAnyMethod();
-                   }));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseCors("AllowCors");
+app.UseCors();
+app.MapHub<TenderHub>("/tenderHub");
 
 app.UseHttpsRedirection();
 
@@ -96,6 +92,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapHub<TenderHub>("/TenderHub");
 
 app.Run();

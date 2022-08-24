@@ -22,7 +22,7 @@ namespace TenderApp.Business.Services
         public async  Task<Result> Add(Car car)
         {
             await _carDal.Add(car);
-            return new Result(Status.Success, "Car was Added");
+            return new Result(Status.Success, "Car  Added");
         }
         public async Task<Result> Delete(Guid id)
         {
@@ -30,12 +30,12 @@ namespace TenderApp.Business.Services
             if (car is null)
                 return new Result(Status.Error, "Cannot delete car > (Car Not Found)");
             await _carDal.Delete(car);
-            return new Result(Status.Success, "Car was Deleted");
+            return new Result(Status.Success, "Car  Deleted");
         }
         public async Task<DataResult<List<Car>>> GetAll()
         {
             var data = await _carDal.GetAll();
-            return new DataResult<List<Car>>(Status.Success, data, "Cars were Listed");
+            return new DataResult<List<Car>>(Status.Success, data, "Cars Listed");
         }
         public async Task<DataResult<Car>> GetById(Guid id)
         {
@@ -47,7 +47,7 @@ namespace TenderApp.Business.Services
         public async Task<Result> Update(Car car)
         {
             await _carDal.Update(car);
-            return new Result(Status.Success, "Car was Updated");
+            return new Result(Status.Success, "Car  Updated");
         }
     }
 }
