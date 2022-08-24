@@ -42,7 +42,7 @@ namespace TenderApp.WebApi.Controllers
         public async Task<IActionResult>Update(Guid id,bool isActive)
         {
             await _documentService.Update(id, isActive);
-            return Ok("Document Updated! \nActive = "+isActive);
+            return Ok("Document Updated! \n Active = "+isActive);
         }
         
     }
