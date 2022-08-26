@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TenderApp.WebApi", "TenderApp.WebApi\TenderApp.WebApi.csproj", "{DD6444A5-4017-4121-A96E-357811694EB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TenderApp.WebApi", "TenderApp.WebApi\TenderApp.WebApi.csproj", "{DD6444A5-4017-4121-A96E-357811694EB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TenderApp.Business", "TenderApp.Business\TenderApp.Business.csproj", "{E9A66615-1F4D-4480-8664-8A7409B0A1F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TenderApp.Business", "TenderApp.Business\TenderApp.Business.csproj", "{E9A66615-1F4D-4480-8664-8A7409B0A1F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TenderApp.DataAccess", "TenderApp.DataAccess\TenderApp.DataAccess.csproj", "{7E44C2F5-4A03-49B8-9A7F-D66017710BE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TenderApp.DataAccess", "TenderApp.DataAccess\TenderApp.DataAccess.csproj", "{7E44C2F5-4A03-49B8-9A7F-D66017710BE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TenderApp.Core", "TenderApp.Core\TenderApp.Core.csproj", "{6072A27E-5515-41D2-88A6-413022E77D85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TenderApp.Core", "TenderApp.Core\TenderApp.Core.csproj", "{6072A27E-5515-41D2-88A6-413022E77D85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TenderApp.Entities", "TenderApp.Entities\TenderApp.Entities.csproj", "{317E54F4-4945-42CE-AA75-456262E79019}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TenderApp.Entities", "TenderApp.Entities\TenderApp.Entities.csproj", "{317E54F4-4945-42CE-AA75-456262E79019}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{2DBD34ED-0B5A-4228-A640-F0D684EFAB2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{317E54F4-4945-42CE-AA75-456262E79019}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{317E54F4-4945-42CE-AA75-456262E79019}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{317E54F4-4945-42CE-AA75-456262E79019}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DBD34ED-0B5A-4228-A640-F0D684EFAB2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DBD34ED-0B5A-4228-A640-F0D684EFAB2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DBD34ED-0B5A-4228-A640-F0D684EFAB2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DBD34ED-0B5A-4228-A640-F0D684EFAB2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

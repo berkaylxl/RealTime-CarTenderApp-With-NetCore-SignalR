@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title> WebClient</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/WebClient.styles.css" asp-append-version="true" />
+</head>
+<body>
+	<header style="background-color:#f8f9fa;box-shadow:lightgrey 5px 3px 15px 1px ">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="#">
+						<img src="~/images/logoi.png" height="50" />
+					</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarScroll">
+						<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+							<li class="nav-item" style="float:right">
+
+							</li>
+						</ul>
+						    <a href="/Auth/Login" class="btn btn-warning"
+								style="border-radius:10px;font-weight:bold;color:white" type="submit">
+							 Giriş Yap / Üye Ol
+							</a>&nbsp;
+						
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+	<main role="main" class="pb-3">
+		@RenderBody()
+	</main>
+	<div class="container mt-5">
+		<hr />
+		<footer class="py-5">
+			<div class="row">
+				<div class="col-2">
+					<h5>Section</h5>
+					<ul class="nav flex-column">
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+					</ul>
+				</div>
+
+				<div class="col-2">
+					<h5>Section</h5>
+					<ul class="nav flex-column">
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+					</ul>
+				</div>
+
+				<div class="col-4 offset-1">
+					<form>
+						<h5>Subscribe to our newsletter</h5>
+						<p>Monthly digest of whats new and exciting from us.</p>
+						<div class="d-flex w-100 gap-2">
+							<label for="newsletter1" class="visually-hidden">Email address</label>
+							<input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+							<button class="btn btn-outline-warning" type="button">Subscribe</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="d-flex justify-content-between py-4 my-4 border-top">
+				<p>© 2021 Company, Inc. All rights reserved.</p>
+				<ul class="list-unstyled d-flex">
+					<li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+					<li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+					<li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+				</ul>
+			</div>
+		</footer>
+	</div>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

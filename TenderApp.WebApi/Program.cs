@@ -46,7 +46,6 @@ builder.Services.AddSingleton<ICorporateCustomerService, CorporateCustomerManage
 builder.Services.AddSingleton<IIndividualCustomerDal, IndividualCustomerDal>();
 builder.Services.AddSingleton<IIndividualCustomerService, IndividualCustomerManager>();
 
-builder.Services.AddSignalR();
 
 //Validator Services
 
@@ -81,8 +80,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors();
-app.MapHub<TenderHub>("/tenderHub");
 
 app.UseHttpsRedirection();
 
