@@ -13,17 +13,11 @@ using TenderApp.Business.Mapping;
 using TenderApp.Entities.DTOs;
 using TenderApp.Entities;
 using TenderApp.Business.SignalRHub;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddCors(opt => opt.AddDefaultPolicy((policy) =>
-{
-    policy.AllowAnyMethod()
-          .AllowAnyHeader()
-          .AllowCredentials()
-          .SetIsOriginAllowed(origin => true);
-}));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -71,8 +65,20 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
+builder.Services.AddSignalR();
+
+//Cors
+builder.Services.AddCors(opt => opt.AddDefaultPolicy((policy) =>
+{
+    policy.AllowAnyMethod()
+           .AllowAnyMethod()
+           .SetIsOriginAllowed(orign => true);
+           
+}));
+
 
 var app = builder.Build();
+
 
 
 if (app.Environment.IsDevelopment())
@@ -80,6 +86,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 
@@ -89,5 +97,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapHub<TenderListHub>("/tenderListHub");
 
 app.Run();

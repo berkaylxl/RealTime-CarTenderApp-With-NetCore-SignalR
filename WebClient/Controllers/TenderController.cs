@@ -8,5 +8,10 @@ namespace WebClient.Controllers
         {
             return View();
         }
+
+        public IActionResult TenderDetail()
+        {
+            return View();
+        }
     }
 }

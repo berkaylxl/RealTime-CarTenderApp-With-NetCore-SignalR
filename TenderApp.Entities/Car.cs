@@ -18,15 +18,13 @@ namespace TenderApp.Entities
         public string PlateState { get; set; }
         public string ChassisNumber { get; set; }
         public string Brand { get; set; }
+        public string Model { get; set; }
         public int Year { get; set; }
         public int EngineSize { get; set; }
         public string FuelType { get; set; }
-        public int DepositValue { get; set; }
-        public int FairValue { get; set; }
-        public int StartPrice { get; set; }
         public string Gear { get; set; }
         public int Mileage { get; set; }
         public string Location { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 }

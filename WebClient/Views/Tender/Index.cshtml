@@ -34,81 +34,220 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-2 p-4  mt-5" style="box-shadow:4px 3px 10px 2px grey;">
+		<div class="col-2 p-2  mt-5" style="box-shadow:4px 3px 10px 2px grey;height:360px;">
 			<form asp-controller="" asp-action="">
 				<div class="form-control">
-					<div class="form-check">
-						<h5 class="form-label" style="color:black">Marka</h5>
-						<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-						<label class="form-check-label" for="flexCheckDefault">
-							Tüm Markalar
-						</label>
+					<select class="form-select mt-3">
+						<option selected>Marka</option>
+						<option value="2">ALFA ROMEO</option>
+						<option value="7">AUDI</option>
+						<option value="9">BMC</option>
+						<option value="10">BMW</option>
+						<option value="13">CHEVROLET</option>
+						<option value="14">CHRYSLER</option>
+						<option value="15">CITROEN</option>
+						<option value="17">DACIA</option>
+						<option value="20">DAIHATSU</option>
+						<option value="98">FORD</option>
+						<option value="31">HONDA</option>
+						<option value="32">HYUNDAI</option>
+						<option value="166">İŞ MAKİNASI</option>
+						<option value="38">KIA</option>
+						<option value="39">LADA</option>
+						<option value="42">LAND ROVER</option>
+						<option value="51">MAZDA</option>
+						<option value="52">MERCEDES</option>
+						<option value="54">MITSUBISHI</option>
+						<option value="104">MOTORSIKLET</option>
+						<option value="57">NISSAN</option>
+						<option value="61">OPEL</option>
+						<option value="64">PEUGEOT</option>
+						<option value="67">PORSCHE</option>
+						<option value="70">RENAULT</option>
+						<option value="75">SEAT</option>
+						<option value="76">SKODA</option>
+						<option value="109">TATA</option>
+						<option value="136">TEZELLER</option>
+						<option value="96">TOFAS-FIAT</option>
+						<option value="84">TOYOTA</option>
+						<option value="85">VOLKSWAGEN</option>
+						<option value="86">VOLVO</option>
+					</select>@*marka*@
+					<select class="form-select mt-3">
+
+						<option selected>Konum</option>
+						<option value="">İSTANBUL</option>
+						<option value="ADANA">ADANA</option>
+						<option value="ADIYAMAN">ADIYAMAN</option>
+						<option value="AFYON">AFYON</option>
+						<option value="AĞRI">AĞRI</option>
+						<option value="AMASYA">AMASYA</option>
+						<option value="ANKARA">ANKARA</option>
+						<option value="ANTALYA">ANTALYA</option>
+						<option value="ARTVİN">ARTVİN</option>
+						<option value="AYDIN">AYDIN</option>
+						<option value="BALIKESİR">BALIKESİR</option>
+						<option value="BİLECİK">BİLECİK</option>
+						<option value="BİNG&#214;L">BİNG&#214;L</option>
+						<option value="BİTLİS">BİTLİS</option>
+						<option value="BOLU">BOLU</option>
+						<option value="BURDUR">BURDUR</option>
+						<option value="BURSA">BURSA</option>
+						<option value="&#199;ANAKKALE">&#199;ANAKKALE</option>
+						<option value="&#199;ANKIRI">&#199;ANKIRI</option>
+						<option value="&#199;ORUM">&#199;ORUM</option>
+						<option value="DENİZLİ">DENİZLİ</option>
+						<option value="DİYARBAKIR">DİYARBAKIR</option>
+						<option value="EDİRNE">EDİRNE</option>
+						<option value="ELAZIĞ">ELAZIĞ</option>
+						<option value="ERZİNCAN">ERZİNCAN</option>
+						<option value="ERZURUM">ERZURUM</option>
+						<option value="ESKİŞEHİR">ESKİŞEHİR</option>
+						<option value="GAZİANTEP">GAZİANTEP</option>
+						<option value="GİRESUN">GİRESUN</option>
+						<option value="G&#220;M&#220;ŞHANE">G&#220;M&#220;ŞHANE</option>
+						<option value="HAKKARİ">HAKKARİ</option>
+						<option value="HATAY">HATAY</option>
+						<option value="ISPARTA">ISPARTA</option>
+						<option value="İ&#199;EL">İ&#199;EL</option>
+						<option value="İSTANBUL">İSTANBUL</option>
+						<option value="İZMİR">İZMİR</option>
+						<option value="KARS">KARS</option>
+						<option value="KASTAMONU">KASTAMONU</option>
+						<option value="KAYSERİ">KAYSERİ</option>
+						<option value="KIRKLARELİ">KIRKLARELİ</option>
+						<option value="KIRŞEHİR">KIRŞEHİR</option>
+						<option value="KOCAELİ">KOCAELİ</option>
+						<option value="KONYA">KONYA</option>
+						<option value="K&#220;TAHYA">K&#220;TAHYA</option>
+						<option value="MALATYA">MALATYA</option>
+						<option value="MANİSA">MANİSA</option>
+						<option value="KAHRAMANMARAŞ">KAHRAMANMARAŞ</option>
+						<option value="MARDİN">MARDİN</option>
+						<option value="MUĞLA">MUĞLA</option>
+						<option value="MUŞ">MUŞ</option>
+						<option value="NEVŞEHİR">NEVŞEHİR</option>
+						<option value="NİĞDE">NİĞDE</option>
+						<option value="ORDU">ORDU</option>
+						<option value="RİZE">RİZE</option>
+						<option value="SAKARYA">SAKARYA</option>
+						<option value="SAMSUN">SAMSUN</option>
+						<option value="SİİRT">SİİRT</option>
+						<option value="SİNOP">SİNOP</option>
+						<option value="SİVAS">SİVAS</option>
+						<option value="TEKİRDAĞ">TEKİRDAĞ</option>
+						<option value="TOKAT">TOKAT</option>
+						<option value="TRABZON">TRABZON</option>
+						<option value="TUNCELİ">TUNCELİ</option>
+						<option value="ŞANLIURFA">ŞANLIURFA</option>
+						<option value="UŞAK">UŞAK</option>
+						<option value="VAN">VAN</option>
+						<option value="YOZGAT">YOZGAT</option>
+						<option value="ZONGULDAK">ZONGULDAK</option>
+						<option value="AKSARAY">AKSARAY</option>
+						<option value="BAYBURT">BAYBURT</option>
+						<option value="KARAMAN">KARAMAN</option>
+						<option value="KIRIKKALE">KIRIKKALE</option>
+						<option value="BATMAN">BATMAN</option>
+						<option value="ŞIRNAK">ŞIRNAK</option>
+						<option value="BARTIN">BARTIN</option>
+						<option value="ARDAHAN">ARDAHAN</option>
+						<option value="IĞDIR">IĞDIR</option>
+						<option value="YALOVA">YALOVA</option>
+						<option value="KARAB&#220;K">KARAB&#220;K</option>
+						<option value="KİLİS">KİLİS</option>
+						<option value="OSMANİYE">OSMANİYE</option>
+						<option value="D&#220;ZCE">D&#220;ZCE</option>
+					</select>
+					<select class="form-select mt-3">
+						<option selected>Yıl</option>
+						<option value="2022">2022</option>
+						<option value="2021">2021</option>
+						<option value="2020">2020</option>
+						<option value="2019">2019</option>
+						<option value="2018">2018</option>
+						<option value="2017">2017</option>
+						<option value="2016">2016</option>
+						<option value="2015">2015</option>
+						<option value="2014">2014</option>
+						<option value="2013">2013</option>
+						<option value="2012">2012</option>
+						<option value="2011">2011</option>
+						<option value="2010">2010</option>
+						<option value="2009">2009</option>
+						<option value="2008">2008</option>
+						<option value="2007">2007</option>
+						<option value="2006">2006</option>
+						<option value="2005">2005</option>
+						<option value="2004">2004</option>
+						<option value="2003">2003</option>
+						<option value="2001">2001</option>
+						<option value="2000">2000</option>
+					</select>
+					<select class="form-select mt-3">
+						<option selected>Vites Tipi</option>
+						<option value="">Otomatik</option>
+						<option value="">Manuel</option>
+					</select>
+					<select class="form-select mt-3">
+						<option selected>Yakıt Türü</option>
+						<option value="">Benzin</option>
+						<option value="">Dizel</option>
+					</select>
+					<div class="d-grid gap-2">
+						<button class="btn btn-outline-success mt-3" type="button">Filtrele</button>
 					</div>
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-						<label class="form-check-label" for="flexCheckDefault">
-							Renault
-						</label>
-					</div>
 				</div>
-				<hr />
-				<div class="form-control">
-					<h5 class="form-label" style="color:black">Yıl</h5>
-					<input class="form-range" type="range" name="kilorange" step="1" min="2000" max="2022" value="" onchange="range1.value=value">
-					<input class="form-control" id="range1" />
-				</div>
-
-				<hr />
-				<div class="form-control">
-					<h5 class="form-label" style="color:black">Kilometre</h5>
-					<input class="form-range" type="range" name="" step="5000" min="0" max="800000" value="" onchange="range2.value=value">
-					<input class="form-control" id="range2" />
-				</div>
-
-				<hr />
-				<div class="form-control">
-					<h5 class="form-label" style="color:black">Fiyat</h5>
-					<input class="form-control" placeholder=" Min" type="text" id="rangePrimary" />
-					<input class="form-control" placeholder=" Max" type="text" id="rangePrimary" />
-				</div>
-
 			</form>
-
 		</div>
+		<div class="col-9 ml-4 mt-4 float-end">
+			<div class="row">
+				@{
+					for (var i = 0; i < 9; i++)
+					{
+						<div class="col-lg-4">
+							<a href="/Tender/TenderDetail" style="text-decoration:none;color:black">
+								<div class="card mr-3 mt-4 " style="width: 18rem;">
+									<img class="card-img-top" src="/images/cardImage.jpg" alt="Card image cap">
+									<div class="card-body text-center">
+										<div class="text-center">
+											<strong>HONDA</strong> Civic<br>
+											İstanbul/Sancaktepe<br>
+											200.000 KM
+										</div>
+										<div class="d-flex justify-content-center mb-2">
+											<span class="badge bg-secondary">Otomatik</span>&nbsp;
+											<span class="badge bg-secondary ">Benzinli</span>
+										</div>
 
+										<span class="badge rounded-pill bg-dark p-2 mt-2 fs-5">
+											01
+											<font style=" font-size:14px;color:grey">SA</font>
+										</span>
 
+										<span class="badge rounded-pill bg-dark p-2 fs-5">
+											25
+											<font style=" font-size:14px;color:grey">DK</font>
+										</span>
+										<span class="badge rounded-pill bg-dark p-2 fs-5">
+											12
+											<font style=" font-size:14px;color:grey">SN</font>
+										</span>
 
-
-		<div class="col-9 ml-2 mt-5">
-			@{
-				for (var i = 0; i < 8; i++)
-				{
-					<div class="col-3">
-						<div class="card" style="width: 18rem;">
-							<img class="card-img-top" src="..." alt="Card image cap">
-							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
-							</div>
+										<span class=" p-2 fs-4 text-center" style="color:orange">
+											<strong>300.000₺</strong><br>
+										</span>
+										<font style=" font-size:14px;color:black;">Açılış Fiyatı</font>
+									</div>
+								</div>
+							</a>
 						</div>
-					</div>
-
+					}
 				}
-			}
+			</div>
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
 
 
 
