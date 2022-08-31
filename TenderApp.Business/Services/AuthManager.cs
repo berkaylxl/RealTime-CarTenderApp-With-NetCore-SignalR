@@ -47,12 +47,13 @@ namespace TenderApp.Business.Services
         public async Task<DataResult<JwtToken>> Login(LoginDto loginDto)
         {
             var user = await GetByMail(loginDto.Email);
+            
             if (user is null)
                 return new DataResult<JwtToken>(Status.Error,null, "User not found");
             var password = Encrpt(loginDto.Password);
             if (user.Password != password)
                 return new DataResult<JwtToken>(Status.Error, null, "Password is wrong");
-
+                
             var claims = new Claim[]{
 
                 new Claim(ClaimTypes.Role,user.Claim),

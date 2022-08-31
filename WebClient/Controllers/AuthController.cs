@@ -1,24 +1,47 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Json;
+using System.Text.Json;
+using WebClient.Models;
 
 namespace WebClient.Controllers
 {
-	public class AuthController : Controller
-	{
-		public IActionResult Login()
-		{
+    public class AuthController : Controller
+    {
+        private readonly HttpClient client = new HttpClient();
 
-			return View();
-		}
-
-		[HttpPost]
-        public IActionResult Login(string a)
+        public IActionResult Login()
         {
-            return Ok();
-        }
 
-        public IActionResult Register()
-		{
             return View();
         }
-	}
+
+        [HttpPost]
+        public async Task<IActionResult> Login(Login logindto)
+        {
+            var response = await client.PostAsJsonAsync(new Uri("http://localhost:5166/api/Auth/Login"), logindto);
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            var data = JsonSerializer.Deserialize<Data>(content);
+            if (data.status==1)
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var token = handler.ReadJwtToken(data.data.token);
+                var payload = token.Payload.ToArray();
+                TempData["Email"] = payload[1].Value.ToString();
+                TempData["Status"] = data.status.ToString();
+                return RedirectToAction("Index","Tender");
+            }
+            else
+            {
+                TempData["Status"] = 0;
+                return View();
+            }
+        }
+        public IActionResult Register()
+        {
+            return View();
+        }
+    }
 }

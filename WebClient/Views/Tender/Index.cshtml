@@ -1,6 +1,8 @@
 ﻿@{
 	Layout = null;
+
 }
+
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/WebClient.styles.css" asp-append-version="true" />
@@ -24,7 +26,7 @@
 					</ul>
 					<a href="/Auth/Login" class="btn btn-warning"
 					   style="border-radius:10px;font-weight:bold;color:white" type="submit">
-						<i class="fa-solid fa-user"></i> Berkaycan Sakar
+						@TempData["Email"]&nbsp;<i class="fa-solid fa-arrow-right-from-bracket"></i>
 					</a>&nbsp;
 				</div>
 			</div>

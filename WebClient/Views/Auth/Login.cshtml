@@ -1,25 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
 @{
     Layout = "";
+    
 }
+@model Login
+
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 <link rel="stylesheet" href="~/css/Signing.css" />
-<title>a</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<title>DIGIHALE</title>
 
 <body class="text-center">
-    <form class="form-signin p-4" style=" box-shadow:2px 5px 15px 5px;border-radius:15px;">
+    <form class="form-signin p-4" style=" box-shadow:2px 5px 15px 5px;border-radius:15px"method="post"asp-controller="Auth" asp-action="Login">
         <img class="mb-5" src="/images/logoi.png" alt="" width="200" height="60">
         <h5 class="h5 mb-3 font-weight-normal">Lütfen giriş yapınız</h5>
-        <input type="email" id="inputEmail" class="form-control mb-2 " placeholder="Email address" required="" autofocus="" style="border-radius:20px">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" style="border-radius:20px">
+        <input asp-for="Email"type="email" id="inputEmail" class="form-control mb-2 " placeholder="Email address" required="" autofocus="" style="border-radius:20px">
+        <input asp-for="Password"type="password" id="inputPassword" class="form-control" placeholder="Password" required="" style="border-radius:20px">
         <div class="checkbox mb-3">
             <label>
-                <input type="checkbox" value="remember-me"> Remember me
+                <input type="checkbox" value="remember-me"> Beni Hatırla
             </label>
         </div>
-        <button class="btn btn-lg btn-warning btn-block mb-5" type="submit"</button><br />
+        <button class="btn btn-lg btn-warning btn-block mb-5" type="submit">Giriş Yap</button><br />
         <p class="">Üyeliğiniz yok mu?</p>
         <a class="mt-5 fw-bold" href="/Auth/Register">Hemen tıklayın ve üye olun</a>
     </form>
