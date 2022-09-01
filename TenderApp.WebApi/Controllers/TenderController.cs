@@ -10,7 +10,6 @@ namespace TenderApp.WebApi.Controllers
     public class TenderController : ControllerBase
     {
         private readonly ITenderService _tenderService;
-
         public TenderController(ITenderService tenderService)
         {
             _tenderService = tenderService;
@@ -18,7 +17,10 @@ namespace TenderApp.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            
             var res = await _tenderService.GetAll();
+
+            
             return Ok(res);
         }
         [HttpGet]

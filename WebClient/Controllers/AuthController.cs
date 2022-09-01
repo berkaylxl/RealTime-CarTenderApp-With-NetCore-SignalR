@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Json;
 using System.Text.Json;
 using WebClient.Models;
+using WebClient.Models.DeserializeModels;
 
 namespace WebClient.Controllers
 {
@@ -23,7 +24,7 @@ namespace WebClient.Controllers
 
             var content = await response.Content.ReadAsStringAsync();
 
-            var data = JsonSerializer.Deserialize<Data>(content);
+            var data = JsonSerializer.Deserialize<LoginData>(content);
             if (data.status==1)
             {
                 var handler = new JwtSecurityTokenHandler();

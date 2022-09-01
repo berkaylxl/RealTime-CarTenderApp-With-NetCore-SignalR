@@ -14,10 +14,12 @@ namespace TenderApp.Business.Services
     public class TenderManager : ITenderService
     {
         private readonly ITenderDal _tenderDal;
+        private readonly ICarService _carService;
 
-        public TenderManager(ITenderDal tenderDal)
+        public TenderManager(ITenderDal tenderDal, ICarService carService)
         {
             _tenderDal = tenderDal;
+            _carService = carService;
         }
 
         public async Task<Result> Add(Tender tender)
@@ -45,6 +47,11 @@ namespace TenderApp.Business.Services
         public async Task<DataResult<List<Tender>>> GetAll()
         {
             var data = await _tenderDal.GetAll();
+            foreach (var item in data)
+            {
+                var car = await _carService.GetById(item.CarId);
+                item.Car =car.Data;
+            }
             return new DataResult<List<Tender>>(Status.Success, data, "Tenders Listed");
         }
         public async Task<Result> Update(Tender tender)

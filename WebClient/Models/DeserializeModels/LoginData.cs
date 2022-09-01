@@ -1,14 +1,13 @@
-﻿namespace WebClient.Models
+﻿namespace WebClient.Models.DeserializeModels
 {
-    public class Data
+    public class LoginData
     {
-        public data data { get; set; }
+        public LoginDataPart data { get; set; }
         public int status { get; set; }
         public string? message { get; set; }
         public object? exception { get; set; }
     }
-
-    public class data
+    public class LoginDataPart
     {
         public string? token { get; set; }
         public DateTime time { get; set; }

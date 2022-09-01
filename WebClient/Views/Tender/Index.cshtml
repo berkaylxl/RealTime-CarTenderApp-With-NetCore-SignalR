@@ -1,13 +1,16 @@
-﻿@{
+﻿@using WebClient.Models.DeserializeModels
+@{
 	Layout = null;
 
 }
+@model TenderData
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/WebClient.styles.css" asp-append-version="true" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+<title>DIGIHALE</title>
+<script src="~/js/Sayac.js" asp-append-version="true"></script>
 <header style="background-color:#f8f9fa;box-shadow:lightgrey 5px 3px 15px 1px ">
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light  ">
@@ -202,10 +205,11 @@
 				</div>
 			</form>
 		</div>
-		<div class="col-9 ml-4 mt-4 float-end">
-			<div class="row">
+		<div class="col-9 mt-4 float-end">
+			
+			<div class="row p-1">
 				@{
-					for (var i = 0; i < 9; i++)
+					foreach (var item in Model.data)
 					{
 						<div class="col-lg-4">
 							<a href="/Tender/TenderDetail" style="text-decoration:none;color:black">
@@ -213,37 +217,42 @@
 									<img class="card-img-top" src="/images/cardImage.jpg" alt="Card image cap">
 									<div class="card-body text-center">
 										<div class="text-center">
-											<strong>HONDA</strong> Civic<br>
-											İstanbul/Sancaktepe<br>
-											200.000 KM
+											<strong>@item.car.brand</strong> @item.car.model<br>
+											@item.car.location<br>
+											@item.car.mileage KM
 										</div>
 										<div class="d-flex justify-content-center mb-2">
-											<span class="badge bg-secondary">Otomatik</span>&nbsp;
-											<span class="badge bg-secondary ">Benzinli</span>
+
+											<span class="badge bg-secondary">@item.car.gear</span>&nbsp;
+											<span class="badge bg-gradient" style="background-color:cadetblue">@item.car.fuelType</span>
+										</div>
+										<div id="@item.id.ToString()">
+											<script>geriSayim("@item.endDate.ToString("yyyy/MM/dd HH:mm:ss")", "@item.id")</script>
+											<span class="badge rounded-pill bg-dark p-2 mt-2 fs-5 ">
+												00 SA
+											</span>
+											<span class="badge rounded-pill bg-dark p-2 fs-5">
+												25 DK
+											</span>
+											<span class="badge rounded-pill bg-dark p-2 fs-5">
+												12 SN
+											</span>
+											<span class=" p-2 fs-4 text-center" style="color:forestgreen">
+												<strong class="blink_me">@item.startPrice ₺</strong><br>
+											</span>
+											<font style=" font-size:14px;color:black;">Açılış Fiyatı</font>
+
 										</div>
 
-										<span class="badge rounded-pill bg-dark p-2 mt-2 fs-5">
-											01
-											<font style=" font-size:14px;color:grey">SA</font>
-										</span>
-
-										<span class="badge rounded-pill bg-dark p-2 fs-5">
-											25
-											<font style=" font-size:14px;color:grey">DK</font>
-										</span>
-										<span class="badge rounded-pill bg-dark p-2 fs-5">
-											12
-											<font style=" font-size:14px;color:grey">SN</font>
-										</span>
-
-										<span class=" p-2 fs-4 text-center" style="color:orange">
-											<strong>300.000₺</strong><br>
-										</span>
-										<font style=" font-size:14px;color:black;">Açılış Fiyatı</font>
 									</div>
 								</div>
 							</a>
 						</div>
+					}
+
+					for (var i = 0; i < 9; i++)
+					{
+							
 					}
 				}
 			</div>
@@ -256,4 +265,3 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>

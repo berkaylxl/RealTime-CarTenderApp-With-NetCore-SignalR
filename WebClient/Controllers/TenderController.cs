@@ -1,25 +1,25 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using WebClient.Models.DeserializeModels;
 
 namespace WebClient.Controllers
 {
 
     public class TenderController : Controller
     {
-        public IActionResult Index()
+        private readonly HttpClient client = new HttpClient();
+        public async Task<IActionResult> Index()
         {
-            string status = "0";
-            if (TempData["Status"] is not null)
-                status = TempData["Status"].ToString();
-            TempData["Status"] = 0;
+            var response = await client.GetAsync(new Uri("http://localhost:5166/api/Tender/GetAll"));
 
-            if (status == "1")
-            {
-                return View();
-            }
-            return RedirectToAction("Login", "Auth");
-           
+            var content = await response.Content.ReadAsStringAsync();
+
+            var data = JsonSerializer.Deserialize<TenderData>(content);
+
+            return View(data);
         }
+
         public IActionResult TenderDetail()
         {
             return View();
