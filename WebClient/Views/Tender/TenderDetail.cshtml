@@ -38,7 +38,7 @@
 </header>
 <div class="container">
 	<div class="row">
-		<hr class="mt-5"/>
+		<hr class="mt-5" />
 	</div>
 	<div class="row mt-2">
 		<div class="col-7">
@@ -64,11 +64,11 @@
 				</button>
 			</div>
 		</div>
-		<div class="col-5 text-center"@* style="border:1px solid black"*@>
-			
+		<div class="col-5 text-center" @* style="border:1px solid black"*@>
+
 			<div style="border-radius:10px;border:1px solid black;background-color:orange">
 				<h5 class="mt-2 fw-bold" style="color:white"><i class="fa-regular fa-clock"></i> KALAN SÜRE</h5>
-				<div id="@Model.data.id.ToString()" >
+				<div id="@Model.data.id.ToString()">
 					<script>geriSayim("@Model.data.endDate.ToString("yyyy / MM / dd HH: mm: ss")", "@Model.data.id")</script>
 					<span class="badge rounded-pill bg-dark p-3 mt-2 fs-5 ">
 						00 SA
@@ -85,19 +85,26 @@
 			<div class="text-start">
 				<h3 class="mt-3">@Model.data.tenderTitle</h3>
 				<font> @Model.data.tenderComment</font><br />
-				<font class="fw-bold mr-2">@Model.data.car.location</font><br />
-				<font class="fw-bold mr-2">@Model.data.car.mileage km</font><br />
+				<font class="fw-bold mr-2">@Model.data.car.location | </font><font class="fw-bold mr-2">@Model.data.car.mileage km</font><br />
+				
 				<span class="badge bg-gradient mr-2" style="border:1px solid black;color:black">@Model.data.car.plate</span>&nbsp;
-				<span class="badge bg-gradient"style="border:1px solid black;color:black">@Model.data.car.gear</span>&nbsp;
+				<span class="badge bg-gradient" style="border:1px solid black;color:black">@Model.data.car.gear</span>&nbsp;
 				<span class="badge bg-gradient" style="border:1px solid black;color:black">@Model.data.car.fuelType</span>&nbsp;
 			</div>
-			
+
 			<hr />
-			<span class=" p-2 fs-4 text-center" style="color:forestgreen">
-				<strong class="blink_me">@Model.data.startPrice ₺</strong><br>
-			</span>
-			<font style=" font-size:14px;color:black;">Açılış Fiyatı</font>
-			<div class="mt-2">
+
+				<span class=" p-2 fs-4 text-center" style="color:darkgreen">
+					<font class="fw-bold" style="color:black" >Açılış Fiyatı : </font>
+					<strong class="">@Model.data.startPrice ₺</strong>
+				</span><br />
+				<span class=" p-2 fs-4 text-center" style="color:forestgreen;">
+				    <font class="fw-bold"style="color:black" >Güncel Fiyatı:</font>
+					<strong class="blink_me">295000 ₺</strong><br>
+				</span>
+	
+			
+			<div class="">
 				<div class="p-5 ">
 					<buton class="btn btn-outline-success mb-2">50₺</buton>
 					<buton class="btn btn-outline-success mb-2">100₺</buton>
@@ -109,16 +116,16 @@
 						<button class="btn btn-success form-control mt-2 p-3 fw-bold"><i class="fa-solid fa-hand-holding-dollar"></i> Teklif Ver</button>
 					</form>
 				</div>
-				
+
 			</div>
-			
-			
+
+
 		</div>
 	</div>
 	<div class="row">
 		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 			<li class="nav-item" role="presentation">
-				<button class="nav-link active"id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Araç Raporları</button>
+				<button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Araç Raporları</button>
 			</li>
 			<li class="nav-item" role="presentation">
 				<button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Araç Özellikleri</button>
@@ -129,13 +136,121 @@
 		</ul>
 		<div class="tab-content" id="pills-tabContent">
 			<div class="tab-pane fade show active text-center" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-				<img src="/images/ekspertiz.jpg" style="width:70%"/>
+				<img src="/images/ekspertiz.jpg" style="width:70%" />
 			</div>
-			<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
-			<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+			<div class="tab-pane fade text-center p-5" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+				<div class="col-5 m-auto">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th class="fw-3">ÖZELLİKLER</th>
+								<th class="text-end"><i class="fa-solid fa-car-side"></i></th>
+							</tr>
+
+						</thead>
+						<tr>
+							<td class="text-start">&emsp;&emsp;&emsp;MARKA:</td>
+							<td class="text-start">@Model.data.car.brand</td>
+						</tr>
+						<tr>
+							<td class="text-start">&emsp;&emsp;&emsp;MODEL:</td>
+							<td class="text-start">@Model.data.car.model</td>
+						</tr>
+						<tr>
+							<td class="text-start">&emsp;&emsp;&emsp;ŞASİ NUMARASI:</td>
+							<td class="text-start">@Model.data.car.chassisNumber</td>
+						</tr>
+						<tr>
+							<td class="text-start">&emsp;&emsp;&emsp;KİLOMETRE:</td>
+							<td class="text-start">@Model.data.car.mileage km</td>
+						</tr>
+						<tr>
+							<td class="text-start">&emsp;&emsp;&emsp;YIL:</td>
+							<td class="text-start">@Model.data.car.year</td>
+						</tr>
+						<tr>
+							<td class="text-start">&emsp;&emsp;&emsp;YAKIT TÜRÜ:</td>
+							<td class="text-start">@Model.data.car.fuelType</td>
+						</tr>
+						<tr>
+							<td class="text-start">&emsp;&emsp;&emsp;VİTES TİPİ:</td>
+							<td class="text-start">@Model.data.car.gear</td>
+						</tr>
+						<tr>
+							<td class="text-start">&emsp;&emsp;&emsp;MOTOR:</td>
+							<td class="text-start">@Model.data.car.engineSize</td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+			<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+				<div class="col-12 m-auto mt-5 p-5" style="box-shadow:lightgrey 5px 3px 15px 1px">
+					<h5><i class="fa-solid fa-circle-info"></i> Bilgilendirme</h5>
+					Satın almaya hak kazandığınız otomobilin geçici tescil belgesi, noter satışı tamamlandıktan sonra üyelik sayfanıza yüklenecek ve erişilebilir olacaktır.
+					Bu tescil belgesinin çıktısını alarak Zorunlu Trafik Sigortası işlemlerinizi başlatabilirsiniz.
+				</div>
+			</div>
 		</div>
 
 	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container mt-5">
+	<hr />
+	<footer class="py-5">
+		<div class="row">
+			<div class="col-2">
+				<h5>Section</h5>
+				<ul class="nav flex-column">
+					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+				</ul>
+			</div>
+
+			<div class="col-2">
+				<h5>Section</h5>
+				<ul class="nav flex-column">
+					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+				</ul>
+			</div>
+
+			<div class="col-4 offset-1">
+				<form>
+					<h5>Yeni ihalelerden haberdar olmak için</h5>
+					<p>Mailini gönder ve anında haberleri yakala.</p>
+					<div class="d-flex w-100 gap-2">
+						<label for="newsletter1" class="visually-hidden">Email address</label>
+						<input id="newsletter1" type="text" class="form-control" placeholder="Email Adres">
+						<button class="btn btn-outline-warning" type="button">Katıl</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="d-flex justify-content-between py-4 my-4 border-top">
+			<p>© 2021 Company, Inc. All rights reserved.</p>
+		</div>
+	</footer>
 </div>
 
 
