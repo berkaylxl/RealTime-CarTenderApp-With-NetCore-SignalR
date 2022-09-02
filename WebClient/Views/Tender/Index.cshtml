@@ -1,7 +1,8 @@
-﻿@using WebClient.Models.DeserializeModels
+﻿@using Newtonsoft.Json
+@using WebClient.Models.DeserializeModels
 @{
 	Layout = null;
-
+	
 }
 @model TenderData
 
@@ -212,8 +213,8 @@
 					foreach (var item in Model.data)
 					{
 						<div class="col-lg-4">
-							<a href="/Tender/TenderDetail" style="text-decoration:none;color:black">
-								<div class="card mr-3 mt-4 " style="width: 18rem;">
+							<a href="/Tender/TenderDetail/@item.id" style="text-decoration:none;color:black">
+								<div class="card mr-3 mt-4 " style="width: 18rem;">	
 									<img class="card-img-top" src="/images/cardImage.jpg" alt="Card image cap">
 									<div class="card-body text-center">
 										<div class="text-center">
@@ -248,11 +249,6 @@
 								</div>
 							</a>
 						</div>
-					}
-
-					for (var i = 0; i < 9; i++)
-					{
-							
 					}
 				}
 			</div>

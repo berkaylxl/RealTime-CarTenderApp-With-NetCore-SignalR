@@ -21,7 +21,7 @@ namespace TenderApp.WebApi.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllByCarIDd(Guid carId)
+        public async Task<IActionResult> GetAllByCarID(Guid carId)
         {
             return Ok( await _documentService.GetListByCarId(carId));
         }

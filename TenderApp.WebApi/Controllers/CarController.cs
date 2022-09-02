@@ -19,6 +19,7 @@ namespace TenderApp.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+           
             var res = await _carService.GetAll();
             return Ok(res);
         }

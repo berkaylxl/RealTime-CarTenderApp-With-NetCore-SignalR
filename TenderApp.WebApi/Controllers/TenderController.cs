@@ -19,8 +19,6 @@ namespace TenderApp.WebApi.Controllers
         {
             
             var res = await _tenderService.GetAll();
-
-            
             return Ok(res);
         }
         [HttpGet]

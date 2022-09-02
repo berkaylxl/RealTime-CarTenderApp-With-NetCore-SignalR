@@ -1,17 +1,17 @@
-﻿using static WebClient.Models.DeserializeModels.CarData;
+﻿
+using static WebClient.Models.DeserializeModels.CarData;
 
 namespace WebClient.Models.DeserializeModels
 {
-    public class TenderData
+    public class TenderDetailData
     {
-
-        public List<TenderDataCar> data { get; set; }
+        public TenderDetailPart data { get; set; }
         public int status { get; set; }
-        public string message { get; set; }
+        public object message { get; set; }
         public object exception { get; set; }
-
     }
-    public class TenderDataCar
+
+    public class TenderDetailPart
     {
         public string id { get; set; }
         public string userId { get; set; }
@@ -24,6 +24,4 @@ namespace WebClient.Models.DeserializeModels
         public int startPrice { get; set; }
         public CarDataPart car { get; set; }
     }
-
-
 }

@@ -15,11 +15,13 @@ namespace TenderApp.Business.Services
     {
         private readonly ITenderDal _tenderDal;
         private readonly ICarService _carService;
+        private readonly IDocumentService _documentService;
 
-        public TenderManager(ITenderDal tenderDal, ICarService carService)
+        public TenderManager(ITenderDal tenderDal, ICarService carService, IDocumentService documentDal)
         {
             _tenderDal = tenderDal;
             _carService = carService;
+            _documentService = documentDal;
         }
 
         public async Task<Result> Add(Tender tender)
@@ -27,7 +29,6 @@ namespace TenderApp.Business.Services
             await _tenderDal.Add(tender);
             return new Result(Status.Success,"Tender added");
         }
-
         public async Task<Result> Delete(Guid id)
         {
             var tender = await _tenderDal.Get(u => u.Id == id);
@@ -39,19 +40,22 @@ namespace TenderApp.Business.Services
         public async Task<DataResult<Tender>> GetById(Guid id)
         {
             var data = await _tenderDal.Get(u => u.Id == id);
+            var car = await _carService.GetById(data.CarId);
+            data.Car = car.Data;
             if (data is null)
                 return new DataResult<Tender>(Status.Error, data, "Tender Not Found");
             return new DataResult<Tender>(Status.Success, data);
         }
-
         public async Task<DataResult<List<Tender>>> GetAll()
         {
             var data = await _tenderDal.GetAll();
             foreach (var item in data)
             {
-                var car = await _carService.GetById(item.CarId);
-                item.Car =car.Data;
+                 var car = await _carService.GetById(item.CarId);
+                 item.Car = car.Data;
+            
             }
+            
             return new DataResult<List<Tender>>(Status.Success, data, "Tenders Listed");
         }
         public async Task<Result> Update(Tender tender)

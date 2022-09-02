@@ -64,7 +64,6 @@ namespace TenderApp.Business.Services
             if (!document.Any())
                 return new DataResult<List<Document>>(Status.Error, document, "Document not found");
             return new DataResult<List<Document>>(Status.Success, document, "Document found");
-
         }
         public async Task<DataResult<Document>> GetById(Guid id)
         {
