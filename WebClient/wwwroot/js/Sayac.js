@@ -1,16 +1,13 @@
 ﻿
 function geriSayim(date, id) {
-    console.log("date= " + date)
 
     var countDownDate = new Date(date).getTime();
 
-    console.log("countDown= "+countDownDate)
     var div = document.getElementById(id).children
     if (countDownDate) { 
         var x = setInterval(function () { 
             var now = new Date().getTime(); 
 
-            console.log("now= "+now)
             var distance = countDownDate - now; 
             if (distance < 0) { 
                 clearInterval(x); 
@@ -23,8 +20,9 @@ function geriSayim(date, id) {
                 div[1].innerHTML = hours +" SA"
                 div[2].innerHTML = minutes + " DK"
                 div[3].innerHTML = seconds + " SN"
-                
             }
         }, 1000); //1 saniyede bir sayaç güncellenecek
     }
 }
+
+

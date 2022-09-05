@@ -1,14 +1,17 @@
 ﻿
 using Microsoft.AspNetCore.Http;
+using NUglify;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using TenderApp.Business.Services.Abstract;
 using TenderApp.Core.Utilities.Result;
 using TenderApp.DataAccess.Abstract;
 using TenderApp.Entities;
+using static System.Net.Mime.MediaTypeNames;
 using static TenderApp.Core.Utilities.Result.ResultStatus;
 
 namespace TenderApp.Business.Services
@@ -82,12 +85,16 @@ namespace TenderApp.Business.Services
             var extensionType = newPath.Split('.').Last();
             if (extensionType == "pdf")
             {
-                path = Environment.CurrentDirectory + @"\wwwroot\Documents";
+                //path = Environment.CurrentDirectory + @"\wwwroot\Documents";
+                path = "C:\\Users\\Berkay\\source\\repos\\TenderApp\\WebClient\\wwwroot\\documents";
                 documentType = DocumentType.DocumentPdf;
             }
             else if (extensionType == "jpg" || extensionType == "png")
             {
-                path = Environment.CurrentDirectory + @"\wwwroot\Images";
+                // path = Environment.CurrentDirectory + @"\wwwroot\Images";
+
+                path = "C:\\Users\\Berkay\\source\\repos\\TenderApp\\WebClient\\wwwroot\\images";
+
                 documentType = DocumentType.DocumentImage;
             }
             else

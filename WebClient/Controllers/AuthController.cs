@@ -20,7 +20,7 @@ namespace WebClient.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(Login logindto)
         {
-            var response = await client.PostAsJsonAsync(new Uri("http://localhost:5166/api/Auth/Login"), logindto);
+            var response = await client.PostAsJsonAsync(new Uri("https://localhost:44354/api/Auth/Login"), logindto);
 
             var content = await response.Content.ReadAsStringAsync();
 

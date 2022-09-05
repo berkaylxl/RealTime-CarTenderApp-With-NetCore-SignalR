@@ -97,6 +97,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapHub<TenderListHub>("/tenderListHub");
+app.MapHub<TenderHub>("/tenderHub");
 
 app.Run();

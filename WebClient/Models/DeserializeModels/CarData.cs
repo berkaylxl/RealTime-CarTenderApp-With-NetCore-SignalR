@@ -22,6 +22,7 @@
             public int mileage { get; set; }
             public string location { get; set; }
             public string description { get; set; }
+            public List<DocumentDataPart> document { get; set; }
         }
 
     }

@@ -14,10 +14,12 @@ namespace TenderApp.Business.Services
     public class CarManager :ICarService
     {
         private readonly ICarDal _carDal;
+        private readonly IDocumentService _documentService;
 
-        public CarManager(ICarDal carDal)
+        public CarManager(ICarDal carDal, IDocumentService documentService)
         {
             _carDal = carDal;
+            _documentService = documentService;
         }
         public async  Task<Result> Add(Car car)
         {
@@ -35,11 +37,19 @@ namespace TenderApp.Business.Services
         public async Task<DataResult<List<Car>>> GetAll()
         {
             var data = await _carDal.GetAll();
+            foreach (var item in data)
+            {
+                var document = await _documentService.GetListByCarId(item.Id);
+                item.Document = document.Data;
+            }
             return new DataResult<List<Car>>(Status.Success, data, "Cars Listed");
+
         }
         public async Task<DataResult<Car>> GetById(Guid id)
         {
             var data = await _carDal.Get(u => u.Id == id);
+            var document = await _documentService.GetListByCarId(data.Id);
+            data.Document = document.Data;
             if (data is null)
                 return new DataResult<Car>(Status.Error, data, "Car Not Found");
             return new DataResult<Car>(Status.Success, data);

@@ -212,43 +212,43 @@
 				@{
 					foreach (var item in Model.data)
 					{
-						<div class="col-lg-4">
-							<a href="/Tender/TenderDetail/@item.id" style="text-decoration:none;color:black">
-								<div class="card mr-3 mt-4 " style="width: 18rem;">	
-									<img class="card-img-top" src="/images/cardImage.jpg" alt="Card image cap">
-									<div class="card-body text-center">
-										<div class="text-center">
-											<strong>@item.car.brand</strong> @item.car.model<br>
-											@item.car.location<br>
-											@item.car.mileage KM
-										</div>
-										<div class="d-flex justify-content-center mb-2">
+								<div class="col-lg-4">
+									<a href="/Tender/TenderDetail/@item.id" style="text-decoration:none;color:black">
+										<div class="card mr-3 mt-4 " style="width: 18rem;">
+											<img class="card-img-top" src="~/images/@Url.Content(item.car.document.First().fileName)" style="width:18rem; height:13rem;" alt="Card image cap">
+											<div class="card-body text-center">
+												<div class="text-center">
+													<strong>@item.car.brand</strong> @item.car.model <br>
+													@item.car.location<br>
+													@item.car.mileage KM
+												</div>
+												<div class="d-flex justify-content-center mb-2">
 
-											<span class="badge bg-secondary">@item.car.gear</span>&nbsp;
-											<span class="badge bg-gradient" style="background-color:cadetblue">@item.car.fuelType</span>
-										</div>
-										<div id="@item.id.ToString()">
-											<script>geriSayim("@item.endDate.ToString("yyyy/MM/dd HH:mm:ss")", "@item.id")</script>
-											<span class="badge rounded-pill bg-dark p-2 mt-2 fs-5 ">
-												00 SA
-											</span>
-											<span class="badge rounded-pill bg-dark p-2 fs-5">
-												25 DK
-											</span>
-											<span class="badge rounded-pill bg-dark p-2 fs-5">
-												12 SN
-											</span>
-											<span class=" p-2 fs-4 text-center" style="color:forestgreen">
-												<strong class="blink_me">@item.startPrice ₺</strong><br>
-											</span>
-											<font style=" font-size:14px;color:black;">Açılış Fiyatı</font>
+													<span class="badge bg-secondary">@item.car.gear</span>&nbsp;
+													<span class="badge bg-gradient" style="background-color:cadetblue">@item.car.fuelType</span>
+												</div>
+												<div id="@item.id.ToString()">
+													<script>geriSayim("@item.endDate.ToString("yyyy/MM/dd HH:mm:ss")", "@item.id")</script>
+													<span class="badge rounded-pill bg-dark p-2 mt-2 fs-5 ">
+														00 SA
+													</span>
+													<span class="badge rounded-pill bg-dark p-2 fs-5">
+														25 DK
+													</span>
+													<span class="badge rounded-pill bg-dark p-2 fs-5">
+														12 SN
+													</span>
+													<span class=" p-2 fs-4 text-center" style="color:forestgreen">
+														<strong class="blink_me">@item.startPrice ₺</strong><br>
+													</span>
+													<font style=" font-size:14px;color:black;">Açılış Fiyatı</font>
 
-										</div>
+												</div>
 
-									</div>
+											</div>
+										</div>
+									</a>
 								</div>
-							</a>
-						</div>
 					}
 				}
 			</div>

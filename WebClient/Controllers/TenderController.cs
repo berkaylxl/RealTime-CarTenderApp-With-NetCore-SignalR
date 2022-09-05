@@ -12,7 +12,7 @@ namespace WebClient.Controllers
        
         public async Task<IActionResult> Index()
         {
-            var response = await client.GetAsync(new Uri("http://localhost:5166/api/Tender/GetAll"));
+            var response = await client.GetAsync(new Uri("https://localhost:44354/api/Tender/GetAll"));
             var content = await response.Content.ReadAsStringAsync();
             var data = JsonSerializer.Deserialize<TenderData>(content);
             return View(data);
@@ -21,7 +21,7 @@ namespace WebClient.Controllers
         [Route("Tender/TenderDetail/{id}")]
         public async Task <IActionResult> TenderDetail(Guid id)
         {
-            var response = await client.GetAsync(new Uri($"http://localhost:5166/api/Tender/GetById?id={id}"));
+            var response = await client.GetAsync(new Uri($"https://localhost:44354/api/Tender/GetById?id={id}"));
             var content = await response.Content.ReadAsStringAsync();
             var data = JsonSerializer.Deserialize<TenderDetailData>(content);
             return View(data);

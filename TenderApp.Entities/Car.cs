@@ -26,5 +26,7 @@ namespace TenderApp.Entities
         public int Mileage { get; set; }
         public string Location { get; set; }
         public string? Description { get; set; }
+
+        public virtual List<Document>? Document { get; set; }
     }
 }

@@ -8,19 +8,18 @@ using TenderApp.Business.Services.Abstract;
 
 namespace TenderApp.Business.SignalRHub
 {
-    public class TenderListHub : Hub
+    public class TenderHub : Hub
     {
         private readonly ITenderService tenderService;
 
-        public TenderListHub(ITenderService tenderService)
+        public TenderHub(ITenderService tenderService)
         {
             this.tenderService = tenderService;
         }
 
-        public async Task SendData()
+        public async Task UpPrice(int newBid)
         {
-            var tenderList = tenderService.GetAll();
-            await Clients.All.SendAsync("SendDataJs",tenderList);
+            await Clients.All.SendAsync("SendDataJs");
         }
       
     }
