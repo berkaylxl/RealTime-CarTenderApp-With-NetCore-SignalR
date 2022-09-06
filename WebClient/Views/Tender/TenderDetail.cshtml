@@ -91,10 +91,10 @@
 						00 SA
 					</span>
 					<span class="badge rounded-pill bg-dark p-3 fs-5">
-						25 DK
+						00 DK
 					</span>
 					<span class="badge rounded-pill bg-dark p-3 fs-5 mb-2">
-						12 SN
+						00 SN
 					</span><br />
 
 				</div>
@@ -110,26 +110,6 @@
 			</div>
 			<hr />
 
-			@*@{
-				HubConnection conn = new HubConnectionBuilder()
-								.WithUrl("http://localhost:5166/tenderHub")
-								.Build();
-
-				conn.StartAsync().ContinueWith(t =>
-				{
-
-					if (t.IsFaulted)
-						Console.WriteLine(t.Exception.GetBaseException());
-					else
-						Console.WriteLine("Connected to Hub");
-				}).Wait();
-
-			    void Trigger(int newBid){
-
-					conn.InvokeAsync("UpPrice", newBid);
-				}
-
-			 }*@
 
 			<span class=" p-2 fs-4 text-center" style="color:darkgreen">
 				<font class="fw-bold" style="color:black">Açılış Fiyatı : </font>
@@ -151,7 +131,7 @@
 
 
 					<form p-3">
-						<input class="form-control" style="border:1px solid black" id="teklifText" placeholder="Teklif Giriniz. Ör: 100000" clatype="text" />
+						<input class="form-control fw-bold" style="border:1px solid black" id="teklifText" placeholder="Teklif Giriniz. Ör: 100000" clatype="text" />
 						<button class="btn btn-success form-control mt-2 p-3 fw-bold"><i class="fa-solid fa-hand-holding-dollar"></i> Teklif Ver</button>
 					</form>
 					<script>
