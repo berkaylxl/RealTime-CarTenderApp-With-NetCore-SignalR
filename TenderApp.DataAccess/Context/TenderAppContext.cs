@@ -17,6 +17,7 @@ namespace TenderApp.DataAccess.Context
         }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Tender> Tenders { get; set; }
+        public DbSet<TenderBid> TenderBids { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<CorporateCustomer> CorporateCustomers { get; set; }
         public DbSet<IndividualCustomer> IndividualCustomers { get; set;}

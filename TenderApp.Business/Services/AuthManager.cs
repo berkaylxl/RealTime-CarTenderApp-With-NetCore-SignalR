@@ -10,6 +10,7 @@ using TenderApp.Business.Services.Abstract;
 using TenderApp.Core.Utilities;
 using TenderApp.Core.Utilities.Result;
 using TenderApp.Core.Utilities.Security;
+using TenderApp.DataAccess;
 using TenderApp.DataAccess.Abstract;
 using TenderApp.Entities;
 using TenderApp.Entities.DTOs;
@@ -29,7 +30,6 @@ namespace TenderApp.Business.Services
             _corporateCustomerDal = corporateCustomerDal;
             _individualCustomerDal = ındividualCustomerDal;
         }
-        
         public async Task<User>GetByMail(string email)
         {
             var individualData= await _corporateCustomerDal.Get(u => u.Email == email);
@@ -47,7 +47,6 @@ namespace TenderApp.Business.Services
         public async Task<DataResult<JwtToken>> Login(LoginDto loginDto)
         {
             var user = await GetByMail(loginDto.Email);
-            
             if (user is null)
                 return new DataResult<JwtToken>(Status.Error,null, "User not found");
             var password = Encrpt(loginDto.Password);
@@ -84,6 +83,22 @@ namespace TenderApp.Business.Services
             byte[] inputBytes = Encoding.ASCII.GetBytes(password);
             byte[] hashBytes = md5.ComputeHash(inputBytes);
             return Convert.ToHexString(hashBytes);
+        }
+
+        public async Task<Guid> GetIdByMail(string email)
+        {
+            
+            var individualData = await _individualCustomerDal.Get(u => u.Email == email);
+            var corporateData = await _corporateCustomerDal.Get(u => u.Email == email);
+
+            if (individualData != null)
+            {
+                return individualData.Id;
+            }
+            else
+            {
+                return corporateData.Id;
+            }
         }
     }
 }

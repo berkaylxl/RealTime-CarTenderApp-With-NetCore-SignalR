@@ -13,3 +13,14 @@ myInput.addEventListener('click', function () {
 myInput2.addEventListener('click', function () {
     $('#staticBackdrop2').modal('show')
 })
+
+function Message(status) {
+    if (status == "1")
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Giriş Başarılı, Hoşgeldiniz',
+            showConfirmButton: false,
+            timer: 1500
+        })
+}

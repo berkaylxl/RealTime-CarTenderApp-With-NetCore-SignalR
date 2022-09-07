@@ -11,9 +11,7 @@ namespace TenderApp.Entities
 {
     public class IndividualCustomer:User,IEntity
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public Guid Id { get; set; }
+        
         public string IdentityNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

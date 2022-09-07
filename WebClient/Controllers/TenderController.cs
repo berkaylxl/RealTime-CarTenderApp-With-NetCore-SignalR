@@ -15,6 +15,8 @@ namespace WebClient.Controllers
             var response = await client.GetAsync(new Uri("https://localhost:44354/api/Tender/GetAll"));
             var content = await response.Content.ReadAsStringAsync();
             var data = JsonSerializer.Deserialize<TenderData>(content);
+   
+
             return View(data);
         }
 

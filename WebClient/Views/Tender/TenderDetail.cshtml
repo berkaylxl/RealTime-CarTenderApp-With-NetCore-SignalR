@@ -1,10 +1,23 @@
 ﻿@using Microsoft.AspNetCore.SignalR.Client
+@using System.IdentityModel.Tokens.Jwt
 @using WebClient.Models.DeserializeModels
-
-@{
-	Layout = "";
-}
+@using Microsoft.AspNetCore.Http;
 @model TenderDetailData
+@{
+
+	Layout = "";
+	string tenderId = Convert.ToString(Model.data.id);
+	var token = Context.Request.Cookies["token"];
+	var handler = new JwtSecurityTokenHandler();
+	var handlerToken = handler.ReadJwtToken(token);
+	var payload = handlerToken.Payload.ToArray();
+
+	HttpClient client = new HttpClient();
+	var response = await client.GetAsync(new Uri($"https://localhost:44354/api/Auth/GetByUserEmail?email={payload[1].Value.ToString()}"));
+	var userId = await response.Content.ReadAsStringAsync();
+	
+}
+
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -12,6 +25,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <title>DIGIHALE</title>
 <script src="~/js/Sayac.js" asp-append-version="true"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 <header style="background-color:#f8f9fa;box-shadow:lightgrey 5px 3px 15px 1px ">
@@ -32,19 +46,21 @@
 					</ul>
 					<a href="/Auth/Login" class="btn btn-warning"
 					   style="border-radius:10px;font-weight:bold;color:white" type="submit">
-						@TempData["Email"]&nbsp;<i class="fa-solid fa-arrow-right-from-bracket"></i>
+						@payload[1].Value.ToString() &nbsp;<i class="fa-solid fa-arrow-right-from-bracket"></i>
 					</a>&nbsp;
 				</div>
 			</div>
 		</nav>
 	</div>
 </header>
+
+
 <div class="container">
 	<div class="row">
 		<hr class="mt-5" />
 	</div>
 	<div class="row mt-2">
-		<div class="col-7">
+		<div class="col-lg-7">
 			<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active ">
@@ -55,21 +71,15 @@
 						foreach (var item in Model.data.car.document)
 						{
 							sayac++;
-							if (sayac == 1)
-							{
-
-							}
+							if (sayac == 1){}
 							else
 							{
-									<div class="carousel-item">
-										<img src="~/images/@Url.Content(item.fileName)" class="d-block w-100" alt="...">
-									</div>
+																<div class="carousel-item">
+																	<img src="~/images/@Url.Content(item.fileName)" class="d-block w-100" alt="...">
+																</div>
 							}
-
 						}
 					}
-
-
 				</div>
 				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
 					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -81,7 +91,7 @@
 				</button>
 			</div>
 		</div>
-		<div class="col-5 text-center" @* style="border:1px solid black"*@>
+		<div class="col-lg-5 text-center" @* style="border:1px solid black"*@>
 
 			<div style="border-radius:10px;border:1px solid black;background-color:orange">
 				<h5 class="mt-2 fw-bold" style="color:white"><i class="fa-regular fa-clock"></i> KALAN SÜRE</h5>
@@ -109,58 +119,66 @@
 				<span class="badge bg-gradient" style="border:1px solid black;color:black">@Model.data.car.fuelType</span>&nbsp;
 			</div>
 			<hr />
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="row">
+							<div class="col text-start scroll" style="box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.75); overflow-y:auto;height:237px">
+								<font class="fs-5 ">Son Teklifler</font>
+								<hr class="mt-1" />
+								<div id="myList"></div>
+									<script></script>
+								 
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<span class=" p-2 fs-5 text-center" style="color:darkgreen">
+							<font class="fw-bold" style="color:black">Açılış Fiyatı : </font>
+							<strong class="">@Model.data.startPrice ₺</strong>
+						</span><br />
+						<span class=" p-2 fs-5 text-center" style="color:forestgreen;">
+							<font class="fw-bold" style="color:black">Güncel Teklif:</font>
+							<strong class="blink_me" id="bidText">@Model.data.lastBidPrice ₺</strong><br>
+						</span>
+					
+							<div class="mt-4">
+								<buton class="btn btn-outline-success mb-2" id="fiyat50">50₺</buton>
+								<buton class="btn btn-outline-success mb-2" id="fiyat100">100₺</buton>
+								<buton class="btn btn-outline-success mb-2" id="fiyat200">200₺</buton>
+							   
+								<form p-3">
+								<input class="form-control fw-bold "type="number" style="border:1px solid black" id="teklifText" placeholder="Teklifi Arttır" clatype="text" />
+								<button class="btn btn-success form-control mt-2 p-3 fw-bold" type="button"	 id="upPriceBtn" onclick="sendTenderData(@userId,newBid,'@tenderId')"><i class="fa-solid fa-hand-holding-dollar"></i> Teklif Ver</button>
+								</form>
+								<script>
+									const btn50 = document.getElementById("fiyat50")
+									const btn100 = document.getElementById("fiyat100")
+									const btn200 = document.getElementById("fiyat200")
+									const btn300 = document.getElementById("fiyat300")
+									const teklifTextBox = document.getElementById("teklifText")
 
-
-			<span class=" p-2 fs-4 text-center" style="color:darkgreen">
-				<font class="fw-bold" style="color:black">Açılış Fiyatı : </font>
-				<strong class="">@Model.data.startPrice ₺</strong>
-			</span><br />
-			<span class=" p-2 fs-4 text-center" style="color:forestgreen;">
-				<font class="fw-bold" style="color:black">Güncel Fiyatı:</font>
-				<strong class="blink_me">295000 ₺</strong><br>
-			</span>
-
-
-			<div class="">
-				<div class="p-5">
-					<buton class="btn btn-outline-success mb-2" id="fiyat50">50₺</buton>
-					<buton class="btn btn-outline-success mb-2" id="fiyat100">100₺</buton>
-					<buton class="btn btn-outline-success mb-2" id="fiyat200">200₺</buton>
-					<buton class="btn btn-outline-success mb-2" id="fiyat300">300₺</buton>
-
-
-
-					<form p-3">
-						<input class="form-control fw-bold" style="border:1px solid black" id="teklifText" placeholder="Teklif Giriniz. Ör: 100000" clatype="text" />
-						<button class="btn btn-success form-control mt-2 p-3 fw-bold"><i class="fa-solid fa-hand-holding-dollar"></i> Teklif Ver</button>
-					</form>
-					<script>
-						const btn50 = document.getElementById("fiyat50")
-						const btn100 = document.getElementById("fiyat100")
-						const btn200 = document.getElementById("fiyat200")
-						const btn300 = document.getElementById("fiyat300")
-						const teklifTextBox = document.getElementById("teklifText")
-				
-						btn50.addEventListener("click", function () {
-							teklifTextBox.value = btn50.innerHTML.replace("₺", "")
-						})
-						btn100.addEventListener("click", function () {
-							teklifTextBox.value = btn100.innerHTML.replace("₺", "")
-						})
-						btn200.addEventListener("click", function () {
-							teklifTextBox.value = btn200.innerHTML.replace("₺", "")
-						})
-						btn300.addEventListener("click", function () {
-							teklifTextBox.value = btn300.innerHTML.replace("₺", "")
-						})
-					</script>
+									btn50.addEventListener("click", function () {
+										teklifTextBox.value = btn50.innerHTML.replace("₺", "")
+										newBid="50"
+									})
+									btn100.addEventListener("click", function () {
+										teklifTextBox.value = btn100.innerHTML.replace("₺", "")
+										newBid="100"
+									})
+									btn200.addEventListener("click", function () {
+										teklifTextBox.value = btn200.innerHTML.replace("₺", "")
+										newBid="200"
+									})
+								</script>
+							</div>
+					</div>
 				</div>
-
+				
 			</div>
-
-
 		</div>
 	</div>
+	<hr />
 	<div class="row">
 		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 			<li class="nav-item" role="presentation">
@@ -178,11 +196,7 @@
 			<div class="tab-pane fade show active text-center" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 				@*<img src="/images/ekspertiz.jpg" style="width:70%" />*@
 				<iframe src="~/documents/corollaekspertiz.pdf" style="width:70%; height:900px;"></iframe>
-
-
 			</div>
-
-
 			<div class="tab-pane fade text-center p-5" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 				<div class="col-5 m-auto">
 					<table class="table table-hover">
@@ -290,3 +304,4 @@
 <script src="~/js/signalr/signalr.js"></script>
 <script src="~/js/Hub.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script>getList("@Model.data.id")</script>

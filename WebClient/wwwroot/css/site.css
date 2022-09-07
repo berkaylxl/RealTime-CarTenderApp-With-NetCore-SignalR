@@ -26,3 +26,17 @@ body {
         opacity: 0.5;
     }
 }
+
+*::-webkit-scrollbar {
+    width: 16px;
+    height:5px;
+}
+*::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: darkorange;
+    border-radius: 10px;
+    border: 3px double #ffffff;
+}

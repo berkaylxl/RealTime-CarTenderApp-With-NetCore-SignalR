@@ -11,9 +11,7 @@ namespace TenderApp.Entities
 {
     public class CorporateCustomer:User,IEntity
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public Guid Id { get; set; }
+        
         public string CompanyTitle { get; set; }
         public string CompanyType { get; set; }
         public string TaxNo { get; set; }

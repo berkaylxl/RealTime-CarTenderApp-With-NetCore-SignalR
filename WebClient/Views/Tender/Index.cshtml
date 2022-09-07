@@ -1,8 +1,12 @@
 ﻿@using Newtonsoft.Json
+@using System.IdentityModel.Tokens.Jwt
 @using WebClient.Models.DeserializeModels
 @{
 	Layout = null;
-	
+	var token = Context.Request.Cookies["token"];
+	var handler = new JwtSecurityTokenHandler();
+	var handlerToken = handler.ReadJwtToken(token);
+	var payload = handlerToken.Payload.ToArray();
 }
 @model TenderData
 
@@ -30,7 +34,7 @@
 					</ul>
 					<a href="/Auth/Login" class="btn btn-warning"
 					   style="border-radius:10px;font-weight:bold;color:white" type="submit">
-						@TempData["Email"]&nbsp;<i class="fa-solid fa-arrow-right-from-bracket"></i>
+						@payload[1].Value.ToString()&nbsp;<i class="fa-solid fa-arrow-right-from-bracket"></i>
 					</a>&nbsp;
 				</div>
 			</div>
@@ -43,7 +47,7 @@
 		<div class="col-2 p-2  mt-5" style="box-shadow:4px 3px 10px 2px grey;height:360px;">
 			<form asp-controller="" asp-action="">
 				<div class="form-control">
-					<select class="form-select mt-3">
+					<select id="" class="form-select mt-3">
 						<option selected>Marka</option>
 						<option value="2">ALFA ROMEO</option>
 						<option value="7">AUDI</option>

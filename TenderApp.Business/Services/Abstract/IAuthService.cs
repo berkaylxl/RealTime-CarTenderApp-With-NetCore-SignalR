@@ -16,6 +16,7 @@ namespace TenderApp.Business.Services.Abstract
         Task<DataResult<JwtToken>> Login(LoginDto loginDto);
         Task<DataResult<string>> IndividualRegister(IndividualRegisterDto individualRegisterDto);
         Task<DataResult<string>> CorporateRegister(CorporateRegisterDto corporateRegisterDto);
+        Task<Guid> GetIdByMail(string email);
        
     }
 }

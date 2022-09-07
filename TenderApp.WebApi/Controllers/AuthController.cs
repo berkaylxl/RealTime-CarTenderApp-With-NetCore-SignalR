@@ -67,5 +67,14 @@ namespace TenderApp.WebApi.Controllers
 
             return BadRequest(ValidateHelper.SendValidateMessage(validResult));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetByUserEmail(string email)
+        {
+            var data =await _authService.GetIdByMail(email);
+            return Ok(data);
+        }
+
+
     }
 }

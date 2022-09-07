@@ -40,6 +40,9 @@ builder.Services.AddSingleton<ICorporateCustomerService, CorporateCustomerManage
 builder.Services.AddSingleton<IIndividualCustomerDal, IndividualCustomerDal>();
 builder.Services.AddSingleton<IIndividualCustomerService, IndividualCustomerManager>();
 
+builder.Services.AddSingleton<ITenderBidService, TenderBidManager>();
+builder.Services.AddSingleton<ITenderBidDal, TenderBidDal>();
+
 
 //Validator Services
 

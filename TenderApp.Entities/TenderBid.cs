@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,15 +9,14 @@ using TenderApp.Core.Entities;
 
 namespace TenderApp.Entities
 {
-    public  class User 
-    {
+	 public class TenderBid:IEntity
+	{
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public Guid Id { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Claim { get; set; }
+        public Guid TenderId { get; set; }
+        public Guid UserId { get; set; }
+        public int BidPrice { get; set; }
+        public DateTime BidDate { get; set; }
     }
 }

@@ -23,22 +23,27 @@ namespace WebClient.Controllers
             var response = await client.PostAsJsonAsync(new Uri("https://localhost:44354/api/Auth/Login"), logindto);
 
             var content = await response.Content.ReadAsStringAsync();
-
             var data = JsonSerializer.Deserialize<LoginData>(content);
+            
             if (data.status==1)
             {
                 var handler = new JwtSecurityTokenHandler();
                 var token = handler.ReadJwtToken(data.data.token);
                 var payload = token.Payload.ToArray();
-                TempData["Email"] = payload[1].Value.ToString();
-                TempData["Status"] = data.status.ToString();
+
+                TempData["Status"] = 1;
+                HttpContext.Response.Cookies.Append("token", data.data.token);
+                System.Threading.Thread.Sleep(1000);
                 return RedirectToAction("Index","Tender");
             }
             else
             {
-                TempData["Status"] = 0;
+                TempData["Status"] = 1;
                 return View();
             }
+
+
+
         }
         public IActionResult Register()
         {

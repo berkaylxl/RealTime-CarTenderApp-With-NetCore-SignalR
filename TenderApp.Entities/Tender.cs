@@ -22,7 +22,11 @@ namespace TenderApp.Entities
         public string TenderComment { get; set; }
         public int BasePrice { get; set; }//satışa esas bedel
         public int StartPrice { get; set; }
+        public Guid? LastBidOwner { get; set; }
+        public int? LastBidPrice { get; set; }
         public virtual Car? Car { get; set; }
-      
+        
+       
+
     }
 }

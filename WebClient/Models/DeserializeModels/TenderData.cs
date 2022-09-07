@@ -22,7 +22,10 @@ namespace WebClient.Models.DeserializeModels
         public string tenderComment { get; set; }
         public int basePrice { get; set; }
         public int startPrice { get; set; }
+        public string? lastBidOwner { get; set; }
+        public int? lastBidPrice { get; set; }
         public CarDataPart car { get; set; }
+    
     }
 
 

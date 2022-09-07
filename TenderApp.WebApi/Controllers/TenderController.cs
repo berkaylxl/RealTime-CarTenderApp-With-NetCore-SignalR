@@ -17,7 +17,6 @@ namespace TenderApp.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            
             var res = await _tenderService.GetAll();
             return Ok(res);
         }
@@ -43,5 +42,7 @@ namespace TenderApp.WebApi.Controllers
         {
             return Ok(await _tenderService.Update(tender));
         }
+
+
     }
 }
