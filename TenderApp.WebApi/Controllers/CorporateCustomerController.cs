@@ -28,6 +28,7 @@ namespace TenderApp.WebApi.Controllers
             var res = await _corporateCustomerService.GetById(id);
             return Ok(res);
         }
+
         [HttpDelete]
         public async Task<IActionResult> Delete(Guid id)
         {

@@ -1,4 +1,6 @@
 ﻿
+
+
 function geriSayim(date, id) {
 
     var countDownDate = new Date(date).getTime();

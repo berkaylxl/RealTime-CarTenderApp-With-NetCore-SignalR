@@ -28,10 +28,11 @@ function getList(tenderId) {
 connection.on("GetBidsList", function (_bidsList) {
     document.querySelector('#myList').innerHTML = ""
     _bidsList.forEach((item) => {
+        var mail = item.userMail.split("@")
         document.querySelector('#myList').innerHTML
             += `
 									   	   <div class="d-flex justify-content-between mt-1">
-												<font class="fs-6"> <i class="fa-solid fa-user"></i>${item.userId.substring(0, 7)}***</font>
+												<font class="fs-6"> <i class="fa-solid fa-user"></i>${mail[0]}****</font>
 												<font class="fs-6">${item.bidPrice}₺</font>
 											</div>
 											`;
@@ -76,10 +77,11 @@ connection.on("SendDataJs", function (_lastBidOwner, _lastBidPrice, _bidsList) {
     console.log(_bidsList);
     document.querySelector('#myList').innerHTML = ""
     BidsList.forEach((item) => {
+        var mail = item.userMail.split("@")
         document.querySelector('#myList').innerHTML
             += `
 									   	   <div class="d-flex justify-content-between mt-1">
-												<font class="fs-6"> <i class="fa-solid fa-user"></i>${item.userId.substring(0, 7)}***</font>
+												<font class="fs-6"> <i class="fa-solid fa-user"></i>${mail[0]}***</font>
 												<font class="fs-6">${item.bidPrice}₺</font>
 											</div>
 											`;

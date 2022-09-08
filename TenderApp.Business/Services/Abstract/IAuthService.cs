@@ -17,6 +17,8 @@ namespace TenderApp.Business.Services.Abstract
         Task<DataResult<string>> IndividualRegister(IndividualRegisterDto individualRegisterDto);
         Task<DataResult<string>> CorporateRegister(CorporateRegisterDto corporateRegisterDto);
         Task<Guid> GetIdByMail(string email);
-       
+        Task<string> GetMailById(Guid id);
+
+
     }
 }

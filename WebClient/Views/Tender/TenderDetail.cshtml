@@ -7,7 +7,7 @@
 
 	Layout = "";
 	string tenderId = Convert.ToString(Model.data.id);
-	var token = Context.Request.Cookies["token"];
+	var token = Context.Session.GetString("Token");
 	var handler = new JwtSecurityTokenHandler();
 	var handlerToken = handler.ReadJwtToken(token);
 	var payload = handlerToken.Payload.ToArray();

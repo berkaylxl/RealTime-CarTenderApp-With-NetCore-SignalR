@@ -31,14 +31,15 @@ namespace WebClient.Controllers
                 var token = handler.ReadJwtToken(data.data.token);
                 var payload = token.Payload.ToArray();
 
-                TempData["Status"] = 1;
-                HttpContext.Response.Cookies.Append("token", data.data.token);
-                System.Threading.Thread.Sleep(1000);
+
+                HttpContext.Session.SetString("Token", data.data.token);
+                //HttpContext.Response.Cookies.Append("token", data.data.token);
+                //System.Threading.Thread.Sleep(1000);
                 return RedirectToAction("Index","Tender");
             }
             else
             {
-                TempData["Status"] = 1;
+
                 return View();
             }
 

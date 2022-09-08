@@ -3,7 +3,7 @@
 @using WebClient.Models.DeserializeModels
 @{
 	Layout = null;
-	var token = Context.Request.Cookies["token"];
+	var token = Context.Session.GetString("Token");
 	var handler = new JwtSecurityTokenHandler();
 	var handlerToken = handler.ReadJwtToken(token);
 	var payload = handlerToken.Payload.ToArray();
@@ -45,48 +45,43 @@
 <div class="container">
 	<div class="row">
 		<div class="col-2 p-2  mt-5" style="box-shadow:4px 3px 10px 2px grey;height:360px;">
-			<form asp-controller="" asp-action="">
+			<form id="form">
 				<div class="form-control">
-					<select id="" class="form-select mt-3">
-						<option selected>Marka</option>
-						<option value="2">ALFA ROMEO</option>
-						<option value="7">AUDI</option>
-						<option value="9">BMC</option>
-						<option value="10">BMW</option>
-						<option value="13">CHEVROLET</option>
-						<option value="14">CHRYSLER</option>
-						<option value="15">CITROEN</option>
-						<option value="17">DACIA</option>
-						<option value="20">DAIHATSU</option>
-						<option value="98">FORD</option>
-						<option value="31">HONDA</option>
-						<option value="32">HYUNDAI</option>
-						<option value="166">İŞ MAKİNASI</option>
-						<option value="38">KIA</option>
-						<option value="39">LADA</option>
-						<option value="42">LAND ROVER</option>
-						<option value="51">MAZDA</option>
-						<option value="52">MERCEDES</option>
-						<option value="54">MITSUBISHI</option>
-						<option value="104">MOTORSIKLET</option>
-						<option value="57">NISSAN</option>
-						<option value="61">OPEL</option>
-						<option value="64">PEUGEOT</option>
-						<option value="67">PORSCHE</option>
-						<option value="70">RENAULT</option>
-						<option value="75">SEAT</option>
-						<option value="76">SKODA</option>
-						<option value="109">TATA</option>
-						<option value="136">TEZELLER</option>
-						<option value="96">TOFAS-FIAT</option>
-						<option value="84">TOYOTA</option>
-						<option value="85">VOLKSWAGEN</option>
-						<option value="86">VOLVO</option>
+					<select name="Brand" class="form-select mt-3" id="brand">
+						<option value="" selected>Marka</option>
+						<option value="Alfa Romeo">ALFA ROMEO</option>
+						<option value="Audi">AUDI</option>
+						<option value="BMC">BMC</option>
+						<option value="BMW">BMW</option>
+						<option value="Citroen">CITROEN</option>
+						<option value="Dacia">DACIA</option>
+						<option value="Ford">FORD</option>
+						<option value="Honda">HONDA</option>
+						<option value="Hyundai">HYUNDAI</option>
+						<option value="KIA">KIA</option>
+						<option value="LADA">LADA</option>
+						<option value="LAND ROVER">LAND ROVER</option>
+						<option value="MAZDA">MAZDA</option>
+						<option value="MERCEDES">MERCEDES</option>
+						<option value="MITSUBISHI">MITSUBISHI</option>
+						<option value="MOTORSIKLET">MOTORSIKLET</option>
+						<option value="NISSAN">NISSAN</option>
+						<option value="OPEL">OPEL</option>
+						<option value="PEUGEOT">PEUGEOT</option>
+						<option value="PORSCHE">PORSCHE</option>
+						<option value="RENAULT">RENAULT</option>
+						<option value="SEAT">SEAT</option>
+						<option value="SKODA">SKODA</option>
+						<option value="TATA">TATA</option>
+						<option value="FIAT">FIAT</option>
+						<option value="TOYOTA">TOYOTA</option>
+						<option value="VOLKSWAGEN">VOLKSWAGEN</option>
+						<option value="VOLVO">VOLVO</option>
 					</select>@*marka*@
-					<select class="form-select mt-3">
+					<select class="form-select mt-3" name="Location" id="location">
 
-						<option selected>Konum</option>
-						<option value="">İSTANBUL</option>
+						<option value="" selected>Konum</option>
+						<option value="İSTANBUL">İSTANBUL</option>
 						<option value="ADANA">ADANA</option>
 						<option value="ADIYAMAN">ADIYAMAN</option>
 						<option value="AFYON">AFYON</option>
@@ -98,14 +93,14 @@
 						<option value="AYDIN">AYDIN</option>
 						<option value="BALIKESİR">BALIKESİR</option>
 						<option value="BİLECİK">BİLECİK</option>
-						<option value="BİNG&#214;L">BİNG&#214;L</option>
+						<option value="BİNGÖL">BİNGÖL</option>
 						<option value="BİTLİS">BİTLİS</option>
 						<option value="BOLU">BOLU</option>
 						<option value="BURDUR">BURDUR</option>
 						<option value="BURSA">BURSA</option>
-						<option value="&#199;ANAKKALE">&#199;ANAKKALE</option>
-						<option value="&#199;ANKIRI">&#199;ANKIRI</option>
-						<option value="&#199;ORUM">&#199;ORUM</option>
+						<option value="ÇANAKKALE">ÇANAKKALE</option>
+						<option value="ÇANKIRI">ÇANKIRI</option>
+						<option value="ÇORUM">ÇORUM</option>
 						<option value="DENİZLİ">DENİZLİ</option>
 						<option value="DİYARBAKIR">DİYARBAKIR</option>
 						<option value="EDİRNE">EDİRNE</option>
@@ -115,11 +110,10 @@
 						<option value="ESKİŞEHİR">ESKİŞEHİR</option>
 						<option value="GAZİANTEP">GAZİANTEP</option>
 						<option value="GİRESUN">GİRESUN</option>
-						<option value="G&#220;M&#220;ŞHANE">G&#220;M&#220;ŞHANE</option>
+						<option value="GÜMÜŞHANE">GÜMÜŞHANE</option>
 						<option value="HAKKARİ">HAKKARİ</option>
 						<option value="HATAY">HATAY</option>
 						<option value="ISPARTA">ISPARTA</option>
-						<option value="İ&#199;EL">İ&#199;EL</option>
 						<option value="İSTANBUL">İSTANBUL</option>
 						<option value="İZMİR">İZMİR</option>
 						<option value="KARS">KARS</option>
@@ -129,7 +123,7 @@
 						<option value="KIRŞEHİR">KIRŞEHİR</option>
 						<option value="KOCAELİ">KOCAELİ</option>
 						<option value="KONYA">KONYA</option>
-						<option value="K&#220;TAHYA">K&#220;TAHYA</option>
+						<option value="KÜTAHYA">KÜTAHYA</option>
 						<option value="MALATYA">MALATYA</option>
 						<option value="MANİSA">MANİSA</option>
 						<option value="KAHRAMANMARAŞ">KAHRAMANMARAŞ</option>
@@ -164,13 +158,13 @@
 						<option value="ARDAHAN">ARDAHAN</option>
 						<option value="IĞDIR">IĞDIR</option>
 						<option value="YALOVA">YALOVA</option>
-						<option value="KARAB&#220;K">KARAB&#220;K</option>
+						<option value="KARABÜK">KARABÜK</option>
 						<option value="KİLİS">KİLİS</option>
 						<option value="OSMANİYE">OSMANİYE</option>
-						<option value="D&#220;ZCE">D&#220;ZCE</option>
+						<option value="DÜZCE">DÜZCE</option>
 					</select>
-					<select class="form-select mt-3">
-						<option selected>Yıl</option>
+					<select class="form-select mt-3" name="Year" id="year">
+						<option value="" selected>Yıl</option>
 						<option value="2022">2022</option>
 						<option value="2021">2021</option>
 						<option value="2020">2020</option>
@@ -194,84 +188,92 @@
 						<option value="2001">2001</option>
 						<option value="2000">2000</option>
 					</select>
-					<select class="form-select mt-3">
-						<option selected>Vites Tipi</option>
-						<option value="">Otomatik</option>
-						<option value="">Manuel</option>
+					<select class="form-select mt-3" name="Gear" id="gear">
+						<option value="" selected>Vites Tipi</option>
+						<option value="Otomatik">Otomatik</option>
+						<option value="Manuel">Manuel</option>
 					</select>
-					<select class="form-select mt-3">
-						<option selected>Yakıt Türü</option>
-						<option value="">Benzin</option>
-						<option value="">Dizel</option>
+					<select class="form-select mt-3" name="Fuel" id="fuel">
+						<option value="" selected>Yakıt Türü</option>
+						<option value="Benzin">Benzin</option>
+						<option value="Dizel">Dizel</option>
 					</select>
 					<div class="d-grid gap-2">
-						<button class="btn btn-outline-success mt-3" type="button">Filtrele</button>
+						<button class="btn btn-outline-success mt-3" id="btnfilter" type="button">Filtrele</button>
 					</div>
 				</div>
 			</form>
+
+
+
+
+
 		</div>
 		<div class="col-9 mt-4 float-end">
-			
+
 			<div class="row p-1">
 				@{
 					foreach (var item in Model.data)
 					{
-								<div class="col-lg-4">
-									<a href="/Tender/TenderDetail/@item.id" style="text-decoration:none;color:black">
-										<div class="card mr-3 mt-4 " style="width: 18rem;">
-											<img class="card-img-top" src="~/images/@Url.Content(item.car.document.First().fileName)" style="width:18rem; height:13rem;" alt="Card image cap">
-											<div class="card-body text-center">
-												<div class="text-center">
-													<strong>@item.car.brand</strong> @item.car.model <br>
-													@item.car.location<br>
-													@item.car.mileage KM
-												</div>
-												<div class="d-flex justify-content-center mb-2">
-
-													<span class="badge bg-secondary">@item.car.gear</span>&nbsp;
-													<span class="badge bg-gradient" style="background-color:cadetblue">@item.car.fuelType</span>
-												</div>
-												<div id="@item.id.ToString()">
-													<script>geriSayim("@item.endDate.ToString("yyyy/MM/dd HH:mm:ss")", "@item.id")</script>
-													<span class="badge rounded-pill bg-dark p-2 mt-2 fs-5 ">
-														00 SA
-													</span>
-													<span class="badge rounded-pill bg-dark p-2 fs-5">
-														00 DK
-													</span>
-													<span class="badge rounded-pill bg-dark p-2 fs-5">
-														00 SN
-													</span>
-													<span class=" p-2 fs-4 text-center" style="color:forestgreen">
-														<strong class="blink_me">@item.startPrice ₺</strong><br>
-													</span>
-													<font style=" font-size:14px;color:black;">Açılış Fiyatı</font>
-
-												</div>
-
-											</div>
+						<div class="col-lg-4">
+							<a href="/Tender/TenderDetail/@item.id" style="text-decoration:none;color:black">
+								<div class="card mr-3 mt-4 " style="width: 18rem;">
+									<img class="card-img-top" src="~/images/@Url.Content(item.car.document.First().fileName)" style="width:18rem; height:13rem;" alt="Card image cap">
+									<div class="card-body text-center">
+										<div class="text-center">
+											<strong>@item.car.brand</strong> @item.car.model <br>
+											@item.car.location<br>
+											@item.car.mileage KM
 										</div>
-									</a>
+										<div class="d-flex justify-content-center mb-2">
+
+											<span class="badge bg-secondary">@item.car.gear</span>&nbsp;
+											<span class="badge bg-gradient" style="background-color:cadetblue">@item.car.fuelType</span>
+										</div>
+										<div id="@item.id.ToString()">
+											<script>geriSayim("@item.endDate.ToString("yyyy/MM/dd HH:mm:ss")", "@item.id")</script>
+											<span class="badge rounded-pill bg-dark p-2 mt-2 fs-5 ">
+												00 SA
+											</span>
+											<span class="badge rounded-pill bg-dark p-2 fs-5">
+												00 DK
+											</span>
+											<span class="badge rounded-pill bg-dark p-2 fs-5">
+												00 SN
+											</span>
+											<span class=" p-2 fs-4 text-center" style="color:forestgreen">
+												<strong class="blink_me">@item.startPrice ₺</strong><br>
+											</span>
+											<font style=" font-size:14px;color:black;">Açılış Fiyatı</font>
+
+										</div>
+
+									</div>
 								</div>
+							</a>
+						</div>
 					}
 				}
 			</div>
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+	$("#btnfilter").click(function () {
+		let _brand = $("#brand").val();
+		let _location = $("#location").val();
+		let _year = $("#year").val();
+		let _gear = $("#gear").val();
+		let _fuel = $("#fuel").val();
+		$.get("/Tender/Index?brand=" + _brand,
+
+			function (data) {
+
+			});
+	});
+
+
+
+</script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

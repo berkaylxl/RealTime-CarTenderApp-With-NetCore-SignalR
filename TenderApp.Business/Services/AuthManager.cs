@@ -100,5 +100,19 @@ namespace TenderApp.Business.Services
                 return corporateData.Id;
             }
         }
+        public async Task<string> GetMailById(Guid userId)
+        {
+            var individualData = await _individualCustomerDal.Get(u=>u.Id==userId);
+            var corporateData = await _corporateCustomerDal.Get(u => u.Id == userId);
+
+            if (individualData != null)
+            {
+                return individualData.Email;
+            }
+            else
+            {
+                return corporateData.Email;
+            }
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace TenderApp.Entities
         public Guid Id { get; set; }
         public Guid TenderId { get; set; }
         public Guid UserId { get; set; }
+        public string? UserMail { get; set; }
         public int BidPrice { get; set; }
         public DateTime BidDate { get; set; }
     }

@@ -16,14 +16,18 @@ namespace TenderApp.Business.Services
 	public class TenderBidManager : ITenderBidService
 	{
 		private readonly ITenderBidDal tenderBidDal;
+		private readonly IAuthService authService;
 
-		public TenderBidManager(ITenderBidDal tenderBidDal)
+		public TenderBidManager(ITenderBidDal tenderBidDal, IAuthService authService)
 		{
 			this.tenderBidDal = tenderBidDal;
+			this.authService = authService;
 		}
 
 		public async Task Add(TenderBid tenderBid)
 		{
+			var email = await authService.GetMailById(tenderBid.UserId);
+			tenderBid.UserMail = email;
             await tenderBidDal.Add(tenderBid);
         }
 		public async Task Delete(Guid id)
