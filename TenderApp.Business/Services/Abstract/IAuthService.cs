@@ -14,7 +14,7 @@ namespace TenderApp.Business.Services.Abstract
     public interface IAuthService
     {
         Task<DataResult<JwtToken>> Login(LoginDto loginDto);
-        Task<DataResult<string>> IndividualRegister(IndividualRegisterDto individualRegisterDto);
+        Task<DataResult<List<string>>> IndividualRegister(IndividualRegisterDto individualRegisterDto);
         Task<DataResult<string>> CorporateRegister(CorporateRegisterDto corporateRegisterDto);
         Task<Guid> GetIdByMail(string email);
         Task<string> GetMailById(Guid id);

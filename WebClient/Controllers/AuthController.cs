@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Net.Http.Json;
 using System.Text.Json;
 using WebClient.Models;
@@ -13,7 +14,6 @@ namespace WebClient.Controllers
 
         public IActionResult Login()
         {
-
             return View();
         }
 
@@ -42,13 +42,21 @@ namespace WebClient.Controllers
 
                 return View();
             }
-
-
-
         }
         public IActionResult Register()
         {
+
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> IndividualRegister(IndividualCustomerRegister individualRegister)
+        {
+            var response = await client.PostAsJsonAsync(new Uri("https://localhost:44354/api/Auth/IndividualRegister"), individualRegister);
+            var content = await response.Content.ReadAsStringAsync();
+            var _data = JsonSerializer.Deserialize<RegisterData>(content);
+            
+            return RedirectToAction("Register");
         }
     }
 }

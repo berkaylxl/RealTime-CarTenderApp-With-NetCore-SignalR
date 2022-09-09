@@ -61,13 +61,13 @@ namespace TenderApp.Business.Services
             var token = JwtHelper.GenerateToken(claims);
             return new DataResult<JwtToken>(Status.Success,token,"Login is Successful");
         }
-        public async Task<DataResult<string>>IndividualRegister(IndividualRegisterDto individualRegisterDto)
+        public async Task<DataResult<List<string>>>IndividualRegister(IndividualRegisterDto individualRegisterDto)
         {
             var registerUser = _mapper.Map<IndividualCustomer>(individualRegisterDto);
             registerUser.Password = Encrpt(individualRegisterDto.Password);
             registerUser.Claim = "user";
             await _individualCustomerDal.Add(registerUser);
-            return new DataResult<string>(Status.Success,"Register is Succussful");
+            return new DataResult<List<string>>(Status.Success,new List<string> {"Register is Successful"});
         }
         public async Task<DataResult<string>>CorporateRegister(CorporateRegisterDto corporateRegisterDto)
         {
@@ -75,7 +75,7 @@ namespace TenderApp.Business.Services
             registerUser.Password = Encrpt(corporateRegisterDto.Password);
             registerUser.Claim = "user";
             await _corporateCustomerDal.Add(registerUser);
-            return new DataResult<string>(Status.Success, "Register is Succussful");
+            return new DataResult<string>(Status.Success, "Register is Successful");
         }
         private static string Encrpt(string password)
         {

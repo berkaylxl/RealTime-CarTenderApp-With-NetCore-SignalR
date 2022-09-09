@@ -2,10 +2,10 @@
 {
 	public class TenderFilter
 	{
-		public string? Brand { get; set; }
-		public string? Location { get; set; }
-		public string? Year { get; set; }
-		public string? Gear { get; set; }
-		public string?	Fuel { get; set; }
+		public string? brand { get; set; }
+		public string? location { get; set; }
+		public string? year { get; set; }
+		public string? gear { get; set; }
+		public string?	fuel { get; set; }
 	}
 }

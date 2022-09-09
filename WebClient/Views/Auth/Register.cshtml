@@ -1,12 +1,12 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@using WebClient.Models.DeserializeModels
 
     <meta name="viewport" content="width=device-width" />
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 	<link rel="stylesheet" href="~/css/Signing.css" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/js/auth.js"></script>
     <title>DIGIHALE</title>
+    
 <div class="container">
 	<div class="row">
         <div class="col-5 rounded-circle overflow-hidden m-auto p-5" id="individual" style="box-shadow:1px 5px 1px 5px orange;">
@@ -16,41 +16,35 @@
 			<img src="/images/kurumsal3.png" width="100%" />
 
 		</div>
-
 	</div>
 
-      @*INDIVIDUAL MODAL*@
-
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <img class="" src="/images/logoi.png" alt="" width="200" height="60">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="p-4" style="">
-                        <h5 class="modal-title mb-3" id="staticBackdropLabel">Üye Ol</h5>
-                        <input type="text" id="kimlik" class="form-control mb-2 " placeholder="TC Kimlik Numarası" required="" autofocus="" style="border-radius:20px">
-                        <input type="text" id="isim" class="form-control mb-2 " placeholder="İsim" required="" autofocus="" style="border-radius:20px">
-                        <input type="text" id="soyisim" class="form-control mb-2 " placeholder="Soyisim" required="" autofocus="" style="border-radius:20px">
-                        <input type="text" id="dogumYeri" class="form-control mb-2 " placeholder="Doğum Yeri" required="" autofocus="" style="border-radius:20px">
-                        <input type="date" id="dogumTarihi" class="form-control mb-2 " placeholder="Doğum Tarihi" required="" autofocus="" style="border-radius:20px">
-                        <input type="tel" id="telefon" class="form-control mb-2 " placeholder="Telefon" required="" autofocus="" style="border-radius:20px">
-                        <textarea class="form-control mb-2" id="adres" rows="3" placeholder="Adres" style="border-radius:20px"></textarea>
-                        <input type="email" id="inputEmail" class="form-control mb-2 " placeholder="Email " required="" autofocus="" style="border-radius:20px">
-                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" style="border-radius:20px">                    
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    
-                    <button class="btn btn-lg btn-warning btn-block mb-2" type="submit">Üye Ol</button><br />
+        @*INDIVIDUAL MODAL*@
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img class="" src="/images/logoi.png" alt="" width="200" height="60">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="p-4" method="post" asp-action="IndividualRegister" asp-controller="Auth">
+                            <h5 class="modal-title mb-3" id="staticBackdropLabel">Üye Ol</h5>
+                            <input type="text" name="IdentityNumber" id="kimlik" class="form-control mb-2 " placeholder="TC Kimlik Numarası" required="" autofocus="" style="border-radius:20px">
+                            <input type="text" name="FirstName" id="isim" class="form-control mb-2 " placeholder="İsim" required="" autofocus="" style="border-radius:20px">
+                            <input type="text" name="LastName" id="soyisim" class="form-control mb-2 " placeholder="Soyisim" required="" autofocus="" style="border-radius:20px">
+                            <input type="text" name="BirthPlace" id="dogumYeri" class="form-control mb-2 " placeholder="Doğum Yeri" required="" autofocus="" style="border-radius:20px">
+                            <input type="date" name="BirthDay" id="dogumTarihi" class="form-control mb-2 " placeholder="Doğum Tarihi" required="" autofocus="" style="border-radius:20px">
+                            <input type="tel" name="PhoneNumber" id="telefon" class="form-control mb-2 " placeholder="Telefon" required="" autofocus="" style="border-radius:20px">
+                            <textarea class="form-control mb-2" name="Address" id="adres" rows="3" placeholder="Adres" style="border-radius:20px"></textarea>
+                            <input type="email" id="inputEmail" name="Email" class="form-control mb-2 " placeholder="Email " required="" autofocus="" style="border-radius:20px">
+                            <input type="password" id="inputPassword" name="Password" class="form-control" placeholder="Password" required="" style="border-radius:20px">
+                        <button class="btn btn-lg btn-warning btn-block mb-2" type="submit" onclick="RegisterMessage()">Üye Ol</button><br />
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     @*CORPORATE MODAL*@
-
     <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -73,11 +67,8 @@
                         <textarea class="form-control mb-2" id="adres" rows="3" placeholder="Adres" style="border-radius:20px"></textarea>
                         <input type="email" id="inputEmail" class="form-control mb-2 " placeholder="Email" required="" autofocus="" style="border-radius:20px">
                         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" style="border-radius:20px">
+                        <button class="btn btn-lg btn-warning btn-block mb-2" type="submit">Üye Ol</button><br />
                     </form>
-                </div>
-                <div class="modal-footer">
-
-                    <button class="btn btn-lg btn-warning btn-block mb-2" type="submit">Üye Ol</button><br />
                 </div>
             </div>
         </div>

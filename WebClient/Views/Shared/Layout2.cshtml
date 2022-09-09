@@ -1,5 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@using Newtonsoft.Json
+@using System.IdentityModel.Tokens.Jwt
+@using WebClient.Models.DeserializeModels
+@{
+	Layout = null;
+	var token = Context.Session.GetString("Token");
+	var handler = new JwtSecurityTokenHandler();
+	var handlerToken = handler.ReadJwtToken(token);
+	var payload = handlerToken.Payload.ToArray();
+}
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +21,13 @@
 	<title>DIGIHALE</title>
 </head>
 <body>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/WebClient.styles.css" asp-append-version="true" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<title>DIGIHALE</title>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="~/js/Sayac.js" asp-append-version="true"></script>
 	<header style="background-color:#f8f9fa;box-shadow:lightgrey 5px 3px 15px 1px ">
 		<div class="container">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light  ">
@@ -25,15 +43,24 @@
 							<li class="nav-item" style="float:right">
 
 							</li>
-						</ul>
-						
-						    <a href="/Auth/Login" class="btn btn-warning"
-								style="border-radius:10px;font-weight:bold;color:white" type="submit">
-							<i class="fa-solid fa-person-walking"></i>&nbsp; Giriş Yap
-							</a>&nbsp;
-						<a href="/Auth/Register" class="btn btn-dark"
-						   style="border-radius:10px;font-weight:bold;color:white" type="submit">
-							<i class="fa-regular fa-address-card"></i>&nbsp; Üye Ol
+
+
+						</ul><a href="#" class="btn btn-outline-warning"
+								style="border-radius:10px;font-weight:bold;color:black" type="submit">
+							<i class="fa-solid fa-inbox"></i>&nbsp;İhalelerim
+						</a>&nbsp
+						<a href="#" class="btn btn-outline-warning"
+						   style="border-radius:10px;font-weight:bold;color:black" type="submit">
+							<i class="fa-solid fa-square-plus"></i>&nbsp;İhale Oluştur
+						</a>&nbsp;
+						<a href="#" class="btn btn-outline-warning"
+						   style="border-radius:10px;font-weight:bold;color:black" type="submit">
+							<i class="fa-solid fa-car-side"></i>&nbsp;Araçlarım
+						</a>&nbsp;
+
+						<a href="/Auth/Login" class="btn btn-warning"
+						   style="border-radius:10px;font-weight:bold;color:black" type="submit">
+							@payload[1].Value.ToString()&nbsp;<i class="fa-solid fa-arrow-right-from-bracket"></i>
 						</a>&nbsp;
 					</div>
 				</div>
@@ -43,7 +70,7 @@
 	<main role="main" class="pb-3">
 		@RenderBody()
 	</main>
-	<div class="container mt-5">
+	<div class="container mt-5 bottom-0">
 		<hr />
 		<footer class="py-5">
 			<div class="row">
@@ -71,12 +98,12 @@
 
 				<div class="col-4 offset-1">
 					<form>
-						<h5>Subscribe to our newsletter</h5>
-						<p>Monthly digest of whats new and exciting from us.</p>
+						<h5>Yeni ihalelerden haberdar olmak için</h5>
+						<p>Mailini gönder ve anında haberleri yakala.</p>
 						<div class="d-flex w-100 gap-2">
 							<label for="newsletter1" class="visually-hidden">Email address</label>
-							<input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-							<button class="btn btn-outline-warning" type="button">Subscribe</button>
+							<input id="newsletter1" type="text" class="form-control" placeholder="Email Adres">
+							<button class="btn btn-outline-warning" type="button">Katıl</button>
 						</div>
 					</form>
 				</div>
@@ -84,13 +111,9 @@
 
 			<div class="d-flex justify-content-between py-4 my-4 border-top">
 				<p>© 2021 Company, Inc. All rights reserved.</p>
-				<ul class="list-unstyled d-flex">
-					<li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-					<li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-					<li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-				</ul>
 			</div>
 		</footer>
+	</div>
 	</div>
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

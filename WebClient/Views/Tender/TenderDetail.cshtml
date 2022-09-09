@@ -5,7 +5,7 @@
 @model TenderDetailData
 @{
 
-	Layout = "";
+	Layout = "Layout2";
 	string tenderId = Convert.ToString(Model.data.id);
 	var token = Context.Session.GetString("Token");
 	var handler = new JwtSecurityTokenHandler();
@@ -17,51 +17,13 @@
 	var userId = await response.Content.ReadAsStringAsync();
 	
 }
-
-
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/WebClient.styles.css" asp-append-version="true" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<title>DIGIHALE</title>
-<script src="~/js/Sayac.js" asp-append-version="true"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-<header style="background-color:#f8f9fa;box-shadow:lightgrey 5px 3px 15px 1px ">
-	<div class="container">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light  ">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="#">
-					<img src="~/images/logoi.png" height="50" />
-				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarScroll">
-					<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-						<li class="nav-item" style="float:right">
-
-						</li>
-					</ul>
-					<a href="/Auth/Login" class="btn btn-warning"
-					   style="border-radius:10px;font-weight:bold;color:white" type="submit">
-						@payload[1].Value.ToString() &nbsp;<i class="fa-solid fa-arrow-right-from-bracket"></i>
-					</a>&nbsp;
-				</div>
-			</div>
-		</nav>
-	</div>
-</header>
-
-
 <div class="container">
 	<div class="row">
 		<hr class="mt-5" />
 	</div>
 	<div class="row mt-2">
 		<div class="col-lg-7">
-			<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+			<div id="carouselExampleControls" class="carousel slide" style="border:3px solid darkorange" data-bs-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active ">
 						<img src="~/images/@Url.Content(Model.data.car.document.FirstOrDefault().fileName)" class="d-block w-100" alt="...">
@@ -74,9 +36,9 @@
 							if (sayac == 1){}
 							else
 							{
-																<div class="carousel-item">
-																	<img src="~/images/@Url.Content(item.fileName)" class="d-block w-100" alt="...">
-																</div>
+						    <div class="carousel-item">
+							     <img src="~/images/@Url.Content(item.fileName)" class="d-block w-100" alt="...">
+						    </div>
 							}
 						}
 					}
@@ -254,51 +216,6 @@
 
 	</div>
 </div>
-
-
-<div class="container mt-5">
-	<hr />
-	<footer class="py-5">
-		<div class="row">
-			<div class="col-2">
-				<h5>Section</h5>
-				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-				</ul>
-			</div>
-
-			<div class="col-2">
-				<h5>Section</h5>
-				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-				</ul>
-			</div>
-
-			<div class="col-4 offset-1">
-				<form>
-					<h5>Yeni ihalelerden haberdar olmak için</h5>
-					<p>Mailini gönder ve anında haberleri yakala.</p>
-					<div class="d-flex w-100 gap-2">
-						<label for="newsletter1" class="visually-hidden">Email address</label>
-						<input id="newsletter1" type="text" class="form-control" placeholder="Email Adres">
-						<button class="btn btn-outline-warning" type="button">Katıl</button>
-					</div>
-				</form>
-			</div>
-		</div>
-
-		<div class="d-flex justify-content-between py-4 my-4 border-top">
-			<p>© 2021 Company, Inc. All rights reserved.</p>
-		</div>
-	</footer>
 </div>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/js/signalr/signalr.js"></script>

@@ -2,46 +2,13 @@
 @using System.IdentityModel.Tokens.Jwt
 @using WebClient.Models.DeserializeModels
 @{
-	Layout = null;
+	Layout = "Layout2";
 	var token = Context.Session.GetString("Token");
 	var handler = new JwtSecurityTokenHandler();
 	var handlerToken = handler.ReadJwtToken(token);
 	var payload = handlerToken.Payload.ToArray();
 }
 @model TenderData
-
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/WebClient.styles.css" asp-append-version="true" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<title>DIGIHALE</title>
-<script src="~/js/Sayac.js" asp-append-version="true"></script>
-<header style="background-color:#f8f9fa;box-shadow:lightgrey 5px 3px 15px 1px ">
-	<div class="container">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light  ">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="#">
-					<img src="~/images/logoi.png" height="50" />
-				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarScroll">
-					<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-						<li class="nav-item" style="float:right">
-
-						</li>
-					</ul>
-					<a href="/Auth/Login" class="btn btn-warning"
-					   style="border-radius:10px;font-weight:bold;color:white" type="submit">
-						@payload[1].Value.ToString()&nbsp;<i class="fa-solid fa-arrow-right-from-bracket"></i>
-					</a>&nbsp;
-				</div>
-			</div>
-		</nav>
-	</div>
-</header>
-
 <div class="container">
 	<div class="row">
 		<div class="col-2 p-2  mt-5" style="box-shadow:4px 3px 10px 2px grey;height:360px;">
@@ -199,18 +166,12 @@
 						<option value="Dizel">Dizel</option>
 					</select>
 					<div class="d-grid gap-2">
-						<button class="btn btn-outline-success mt-3" id="btnfilter" type="button">Filtrele</button>
+						<button class="btn btn-warning mt-3" id="btnfilter" type="submit">Filtrele</button>
 					</div>
 				</div>
 			</form>
-
-
-
-
-
 		</div>
 		<div class="col-9 mt-4 float-end">
-
 			<div class="row p-1">
 				@{
 					foreach (var item in Model.data)
@@ -266,11 +227,12 @@
 		let _year = $("#year").val();
 		let _gear = $("#gear").val();
 		let _fuel = $("#fuel").val();
-		$.get("/Tender/Index?brand=" + _brand,
-
-			function (data) {
-
-			});
+		$.get("/Tender/Index",{
+			brand:_brand,
+			location:_location,
+		    year:_year,
+		    gear:_gear,
+		    fuel:_fuel}
 	});
 
 
