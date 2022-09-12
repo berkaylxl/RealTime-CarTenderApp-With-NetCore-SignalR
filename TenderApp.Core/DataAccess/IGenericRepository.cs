@@ -16,12 +16,5 @@ namespace TenderApp.Core.DataAccess
         Task Delete(TEntity entity);
         Task<List<TEntity>>GetAll(Expression<Func<TEntity,bool>> filter=null);
         Task<TEntity> Get(Expression<Func<TEntity, bool>> filter);
-       
-
-
-
-
-
-
     }
 }

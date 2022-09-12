@@ -19,18 +19,14 @@ namespace TenderApp.Core.Utilities.Security
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("S3CR3TKEY!?&9785425"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var expiry = DateTime.UtcNow.AddDays(10);
-            var token = new JwtSecurityToken(claims: claims,
-                                            expires: expiry,
-                                            signingCredentials: creds,
-                                            notBefore: DateTime.Now);
-
+            var token = new JwtSecurityToken(claims: claims, expires: expiry,
+                                            signingCredentials: creds, notBefore: DateTime.Now);
             var tokenkey = new JwtSecurityTokenHandler().WriteToken(token);
             return new JwtToken
             {
                 Token = tokenkey,
                 Time = expiry
-        };
-
+            };
         }
     }
 }

@@ -10,7 +10,7 @@ using TenderApp.Core.Entities;
 namespace TenderApp.Entities
 {
 	 public class TenderBid:IEntity
-	{
+	 {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public Guid Id { get; set; }
@@ -19,5 +19,5 @@ namespace TenderApp.Entities
         public string? UserMail { get; set; }
         public int BidPrice { get; set; }
         public DateTime BidDate { get; set; }
-    }
+     }
 }

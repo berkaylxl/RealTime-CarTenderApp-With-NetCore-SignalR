@@ -26,18 +26,13 @@ namespace TenderApp.Business.Services
         }
         public async Task<Result> Add(IFormFile file, Document document)
         {
-
             string sourcePath = Path.GetTempFileName();
             if (file.Length > 0)
             {
-                using (var stream = new FileStream(sourcePath, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
+                using (var stream = new FileStream(sourcePath, FileMode.Create)) { file.CopyTo(stream); }
             }
             string destFileName = CreateNewFilePath(file);
             File.Move(sourcePath, destFileName);
-
             document.Url = destFileName;
             document.FileName = destFileName.Split('\\').Last();
             document.IsActive = true;
@@ -46,7 +41,6 @@ namespace TenderApp.Business.Services
             await _documentDal.Add(document);
             return new Result(Status.Success, "Added is successful");
         }
-
         public async Task<Result> Delete(Document document)
         {
             try
@@ -57,7 +51,6 @@ namespace TenderApp.Business.Services
             }
             catch (Exception e)
             {
-
                 return new Result(Status.Success, "Could not deleted", e);
             }
         }
@@ -81,20 +74,15 @@ namespace TenderApp.Business.Services
             FileInfo fileInfo = new FileInfo(file.FileName);
             string fileExtensions = fileInfo.Extension;
             string newPath = Guid.NewGuid().ToString() + fileExtensions;
-
             var extensionType = newPath.Split('.').Last();
             if (extensionType == "pdf")
             {
-                //path = Environment.CurrentDirectory + @"\wwwroot\Documents";
                 path = "C:\\Users\\Berkay\\source\\repos\\TenderApp\\WebClient\\wwwroot\\documents";
                 documentType = DocumentType.DocumentPdf;
             }
             else if (extensionType == "jpg" || extensionType == "png")
             {
-                // path = Environment.CurrentDirectory + @"\wwwroot\Images";
-
                 path = "C:\\Users\\Berkay\\source\\repos\\TenderApp\\WebClient\\wwwroot\\images";
-
                 documentType = DocumentType.DocumentImage;
             }
             else

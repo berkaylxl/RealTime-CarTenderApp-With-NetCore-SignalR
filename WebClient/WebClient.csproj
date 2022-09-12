@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Models\ViewModels\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\images\" />

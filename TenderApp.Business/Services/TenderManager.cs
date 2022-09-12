@@ -15,14 +15,11 @@ namespace TenderApp.Business.Services
     {
         private readonly ITenderDal _tenderDal;
         private readonly ICarService _carService;
-       
-
         public TenderManager(ITenderDal tenderDal, ICarService carService)
         {
             _tenderDal = tenderDal;
             _carService = carService;
         }
-
         public async Task<Result> Add(Tender tender)
         {
             await _tenderDal.Add(tender);

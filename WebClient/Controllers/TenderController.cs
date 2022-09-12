@@ -13,7 +13,6 @@ namespace WebClient.Controllers
     public class TenderController : Controller
     {
         private readonly HttpClient client = new HttpClient();
-       
         public async Task<IActionResult> Index( TenderFilter filter )
         {
             var response = await client.GetAsync(new Uri("https://localhost:44354/api/Tender/GetAll"));
@@ -39,7 +38,6 @@ namespace WebClient.Controllers
             }
             return View(data);
         }
-
         [Route("Tender/TenderDetail/{id}")]
         public async Task <IActionResult> TenderDetail(Guid id)
         {
@@ -48,9 +46,19 @@ namespace WebClient.Controllers
             var data = JsonSerializer.Deserialize<TenderDetailData>(content);
             return View(data);
         }
-
-        
-
+        [Route("Tender/MyTenders/{userId}")]
+        public async Task<IActionResult> MyTenders(string userId)
+        {
+            var response = await client.GetAsync(new Uri("https://localhost:44354/api/Tender/GetAll"));
+            var content = await response.Content.ReadAsStringAsync();
+            var data = JsonSerializer.Deserialize<TenderData>(content);
+            var filteredData = data.data.Where(t => t.userId == userId).ToList();
+            return View(filteredData);
+        }
+        public async Task<IActionResult> CreateTender()
+        {
+            return View();
+        }
 
     }
 }

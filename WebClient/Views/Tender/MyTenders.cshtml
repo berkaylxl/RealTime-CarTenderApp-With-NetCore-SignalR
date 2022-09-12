@@ -1,0 +1,64 @@
+﻿@using WebClient.Models.DeserializeModels
+
+@{
+    ViewData["Title"] = "MyTenders";
+    Layout = "Layout2";
+}
+@model List<TenderDataCar>
+
+<div class="container">
+    <div class="row text-center mt-5 mb-5">
+        <h3>İHALELERİM</h3>
+    </div>
+    @{
+       foreach (var item in Model)
+       {
+            <div class="row p-2 mt-4" style="border:2px solid orange;border-radius:30px;box-shadow:3px 2px 35px -13px black ">
+                        <div class="col-lg-3">
+                            <img class="m-auto" src="~/images/@Url.Content(item.car.document.First().fileName)" width="100%" style="border-radius:20px">
+                        </div>
+                    <div class="col-lg-9" style="">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="container">
+                                    <div class="row">
+                                      <div class="col-lg-8"> 
+                                           <h4>@item.tenderTitle</h4>
+                                            <font class="fs-5">@item.tenderComment</font><br>
+                                            <span class="badge bg-gradient mr-2" style="border:1px solid black;color:black">@item.car.plate</span>&nbsp;
+                                            <font class="fs-6" >@item.car.year Model</font><br>
+                                            <font class="fs-6" >@item.car.fuelType</font>
+                                            <font class="fs-6 fw-bold">@item.car.gear</font>
+                                      </div>
+                                    <div class="col-lg-4">
+                                            <div id="@item.id.ToString()">
+                                                <script>geriSayim("@item.endDate.ToString("yyyy/MM/dd HH:mm:ss")", "@item.id")</script>
+                                                <span class="badge rounded-pill bg-dark p-2 mt-2 fs-5 ">
+                                                    00 SA
+                                                </span>
+                                                <span class="badge rounded-pill bg-dark p-2 fs-5">
+                                                    00 DK
+                                                </span>
+                                                <span class="badge rounded-pill bg-dark p-2 fs-5">
+                                                    00 SN
+                                                </span><br>
+                                                <font style=" font-size:18px;color:black;font-weight:bold">Açılış Fiyatı</font>
+                                                <span class=" p-2 fs-4 text-center" style="color:forestgreen">
+                                                    <strong class="">@item.startPrice ₺</strong><br>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-3">
+                                    <a href="/Tender/TenderDetail/@item.id" class="btn btn-success mt-3 p">Detaylar&nbsp;&nbsp;</a><br>
+                                    <button class="btn btn-danger mb-2 mt-2">İhale İptal</button><br>
+                                    <button class="btn btn-warning" style="color:white">Süre Uzat </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+       }
+    }
+    
+</div>
+

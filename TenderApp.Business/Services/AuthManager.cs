@@ -52,11 +52,10 @@ namespace TenderApp.Business.Services
             var password = Encrpt(loginDto.Password);
             if (user.Password != password)
                 return new DataResult<JwtToken>(Status.Error, null, "Password is wrong");
-                
             var claims = new Claim[]{
-
                 new Claim(ClaimTypes.Role,user.Claim),
                 new Claim(ClaimTypes.Email,user.Email),
+                new Claim(ClaimTypes.SerialNumber,user.Id.ToString())
             };
             var token = JwtHelper.GenerateToken(claims);
             return new DataResult<JwtToken>(Status.Success,token,"Login is Successful");

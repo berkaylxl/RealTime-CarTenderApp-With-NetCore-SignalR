@@ -14,7 +14,6 @@ namespace TenderApp.Core.DataAccess
         where TEntity :class,IEntity
         where TContext:DbContext,new()   
     {
-       
         public async Task Add(TEntity entity)
         {
             using (TContext context =new TContext())
@@ -23,7 +22,6 @@ namespace TenderApp.Core.DataAccess
                 await context.SaveChangesAsync();
             }
         }
-
         public async Task Add(IEnumerable<TEntity> entities)
         {
             using(TContext context =new TContext())

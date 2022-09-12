@@ -19,8 +19,6 @@
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/WebClient.styles.css" asp-append-version="true" />
 	<title>DIGIHALE</title>
-</head>
-<body>
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/WebClient.styles.css" asp-append-version="true" />
@@ -28,11 +26,14 @@
 	<title>DIGIHALE</title>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="~/js/Sayac.js" asp-append-version="true"></script>
+</head>
+<body>
+	
 	<header style="background-color:#f8f9fa;box-shadow:lightgrey 5px 3px 15px 1px ">
 		<div class="container">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light  ">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="#">
+					<a class="navbar-brand" href="/Home/Index">
 						<img src="~/images/logoi.png" height="50" />
 					</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,13 +44,12 @@
 							<li class="nav-item" style="float:right">
 
 							</li>
-
-
-						</ul><a href="#" class="btn btn-outline-warning"
+						</ul>
+						<a href="/Tender/MyTenders/@Url.Content(payload[2].Value.ToString())" class="btn btn-outline-warning"
 								style="border-radius:10px;font-weight:bold;color:black" type="submit">
 							<i class="fa-solid fa-inbox"></i>&nbsp;İhalelerim
 						</a>&nbsp
-						<a href="#" class="btn btn-outline-warning"
+						<a href="/Tender/CreateTender" class="btn btn-outline-warning"
 						   style="border-radius:10px;font-weight:bold;color:black" type="submit">
 							<i class="fa-solid fa-square-plus"></i>&nbsp;İhale Oluştur
 						</a>&nbsp;
@@ -57,7 +57,6 @@
 						   style="border-radius:10px;font-weight:bold;color:black" type="submit">
 							<i class="fa-solid fa-car-side"></i>&nbsp;Araçlarım
 						</a>&nbsp;
-
 						<a href="/Auth/Login" class="btn btn-warning"
 						   style="border-radius:10px;font-weight:bold;color:black" type="submit">
 							@payload[1].Value.ToString()&nbsp;<i class="fa-solid fa-arrow-right-from-bracket"></i>
